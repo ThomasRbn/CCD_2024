@@ -33,7 +33,8 @@ jobs:
          host: docketu.iutnc.univ-lorraine.fr
          username: ${{ secrets.UNIV_LOGIN }}
          key: ${{ secrets.UNIV_RSA }}
-         port: 22
+         password: ${{ secrets.PASSWORD }}
+         #port: 22
          script: whoami
          #script: docker pull thomasrbn/ccd_infra_api
     ###############
