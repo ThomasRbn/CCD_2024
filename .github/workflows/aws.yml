@@ -15,7 +15,7 @@ jobs:
    # - name: install sshpass
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
     - name: Connect to Docketu
-      run: sudo mkdir -p ~/.ssh
+      run:
         echo ${{ secrets.UNIV_RSA }} > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
