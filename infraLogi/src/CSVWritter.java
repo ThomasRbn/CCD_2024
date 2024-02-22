@@ -28,6 +28,6 @@ public class CSVWritter {
             }
             csvFinal.append("\n");
         }
-        return csv.toString();
+        return csvFinal.toString();
     }
 }
