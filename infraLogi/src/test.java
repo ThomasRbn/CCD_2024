@@ -19,13 +19,13 @@ public class test {
         "3;Celine;3;JP;OR;FR;IT;MEX;GR;);" );
         Probleme probleme = new Probleme();
         ProblemeEtat etat = new ProblemeEtat(donnees);
-        BFS bfs = new BFS(probleme, etat);
-        bfs.solve();
-        Donnees donneesfinal = bfs.getEnd_node().getDonnees();
+        AStar aStar = new AStar(probleme, etat);
+        aStar.solve();
+        Donnees donneesfinal = aStar.getEnd_node().getDonnees();
         for (int i = 0; i < donneesfinal.getCandidats().size(); i++) {
             System.out.print(donneesfinal.getCandidats().get(i).getId() + ";" + donneesfinal.getCandidats().get(i).getPrenom() + ";");
-            for (int j = 0; j < donneesfinal.getCandidats().get(i).getAteliers().size(); j++) {
-                System.out.print(donneesfinal.getCandidats().get(i).getAteliers().get(j) + ";");
+            for (int j = 0; j < donneesfinal.getCandidats().get(i).getAteliersAffecte().size(); j++) {
+                System.out.print(donneesfinal.getCandidats().get(i).getAteliersAffecte().get(j) + ";");
             }
             System.out.println();
         }

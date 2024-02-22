@@ -1,3 +1,4 @@
+import algo.AStar;
 import algo.BFS;
 import algo.Probleme;
 import algo.ProblemeEtat;
@@ -17,10 +18,10 @@ public class CSVWritter {
         Donnees donnees = CSVReader.reader(csv);
         Probleme probleme = new Probleme();
         ProblemeEtat etat = new ProblemeEtat(donnees);
-        BFS bfs = new BFS(probleme, etat);
-        bfs.solve();
+        AStar aStar = new AStar(probleme, etat);
+        aStar.solve();
         StringBuilder csvFinal = new StringBuilder();
-        Donnees donneesfinal = bfs.getEnd_node().getDonnees();
+        Donnees donneesfinal = aStar.getEnd_node().getDonnees();
         for (Candidats candidats : donneesfinal.getCandidats()) {
             csvFinal.append(candidats.getId()).append(";").append(candidats.getPrenom()).append(";");
             for (String atelier : candidats.getAteliersAffecte()) {
