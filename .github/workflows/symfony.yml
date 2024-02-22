@@ -39,6 +39,6 @@ jobs:
             -   name: Install Dependencies
                 run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
             -   name: TOto
-                run: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mariadb
+                run: docker inspect mariadb
             -   name: Run Symfony Tests
                 run: php infraAPI/bin/console doctrine:database:create --if-not-exists
