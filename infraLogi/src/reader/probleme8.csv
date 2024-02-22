@@ -1,0 +1,17 @@
+ateliers;
+id;theme;nb;
+1;JP;4;
+2;OR;3;
+3;OR;2;
+4;GR;2;
+5;IT;1;
+
+candidats;
+id;nom;nbDemande;ordre1;ordre2;ordre3;ordre4;ordre5;ordre6;
+1;Albert;4;JP;OR;GR;IT;MEX;FR;
+2;Bertrand;4;JP;OR;GR;IT;MEX;FR;
+3;Celine;1;JP;OR;GR;IT;MEX;FR;
+4;Delphine;1;FR;JP;MEX;IT;GR;OR;
+5;Edouard;4;FR;JP;MEX;IT;GR;OR;
+6;Fabrice;4;JP;GR;OR;FR;IT;MEX;
+7;George;1;JP;GR;OR;FR;IT;MEX;
