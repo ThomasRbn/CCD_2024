@@ -80,6 +80,15 @@ public class Donnees {
                 return false;
             }
         }
+        return true;
+    }
+
+    public ArrayList<Ateliers> getAteliers() {
+        return ateliers;
+    }
+
+    public ArrayList<Candidats> getCandidats() {
+        return candidats;
     }
 
 

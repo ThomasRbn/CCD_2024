@@ -7,6 +7,11 @@ import java.util.ArrayList;
 public class Candidats {
     int id;
     String prenom;
+
+    int nbAteliersInscrit;
+
+    int nbDemande;
+
     // Liste des candidatures
     ArrayList<String> candidatures;
 
@@ -14,9 +19,10 @@ public class Candidats {
     ArrayList<String> ateliers;
 
 
-    public Candidats(int id, String prenom, ArrayList<String> candidatures) {
+    public Candidats(int id, String prenom, int nbDemande, ArrayList<String> candidatures) {
         this.id = id;
         this.prenom = prenom;
+        this.nbDemande = nbDemande;
         this.candidatures = candidatures;
     }
 
