@@ -4,7 +4,7 @@
       <h1 class="page-title">Affectations aux prochains ateliers</h1>
     </div>
     <div class="workshops-container">
-      <div v-for="(workshop, index) in workshops" :key="index" class="workshop-card">
+      <div v-for="(workshop, index) in displayedWorkshops" :key="index" class="workshop-card">
         <div class="workshop-details">
           <h2 class="workshop-title">{{ workshop.title }}</h2>
           <p class="workshop-info">{{ workshop.date }}, {{ workshop.time }}</p>
@@ -19,8 +19,13 @@
         </div>
       </div>
     </div>
+    <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 0" class="pagination-button">Précédent</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages - 1" class="pagination-button">Suivant</button>
+    </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -63,10 +68,100 @@ export default {
             { name: "Paul Durand" },
             { name: "Sophie Dubois" }
           ]
-        }
+        },
 
-      ]
+        {
+          id: 4,
+          title: "Cocina Mexicana",
+          date: "Programmé au 20 janvier 2024",
+          time: "12h00",
+          cuisine: "Cuisine Mexicaine",
+          users: [
+            { name: "Jean Dupont" },
+            { name: "Marie Martin" },
+            { name: "Paul Durand" },
+            { name: "Sophie Dubois" },
+            { name: "Lucie Leroy" }
+          ]
+        },
+
+        {
+          id: 5,
+          title: "Curry House",
+          date: "Programmé au 22 janvier 2024",
+          time: "18h00",
+          cuisine: "Cuisine Indienne",
+          users: [
+            { name: "Jean Dupont" },
+            { name: "Marie Martin" },
+            { name: "Paul Durand" },
+            { name: "Sophie Dubois" },
+            { name: "Lucie Leroy" },
+            { name: "Pierre Leclerc" }
+          ]
+        },
+
+        {
+          id: 6,
+          title: "Dolci Italiani",
+          date: "Programmé au 25 janvier 2024",
+          time: "15h30",
+          cuisine: "Pâtisserie Italienne",
+          users: [
+            { name: "Jean Dupont" },
+            { name: "Marie Martin" },
+            { name: "Paul Durand" },
+            { name: "Sophie Dubois" },
+            { name: "Lucie Leroy" },
+            { name: "Pierre Leclerc" },
+            { name: "Emma Martin" }
+          ]
+        },
+
+        {
+          id: 7,
+          title: "Sushi Fusion",
+          date: "Programmé au 30 janvier 2024",
+          time: "16h00",
+          cuisine: "Cuisine Fusion",
+          users: [
+            { name: "Jean Dupont" },
+            { name: "Marie Martin" },
+            { name: "Paul Durand" },
+            { name: "Sophie Dubois" },
+            { name: "Lucie Leroy" },
+            { name: "Pierre Leclerc" },
+            { name: "Emma Martin" },
+            { name: "Lucas Lambert" },
+            { name: "Léa Lefevre" }
+          ]
+        }
+      ],
+      itemsPerPage: 4,
+      currentPage: 0
     };
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.workshops.length / this.itemsPerPage);
+    },
+    displayedWorkshops() {
+      const startIndex = this.currentPage * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.workshops.slice(startIndex, endIndex);
+    }
+  },
+  methods: {
+    prevPage() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+      }
+    }
   }
 };
 </script>
@@ -148,4 +243,30 @@ export default {
   font-size: 1rem;
   color: #333333;
 }
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 </style>
+
+
+
+
+
+
