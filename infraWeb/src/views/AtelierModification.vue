@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 
-const items = ref([{ message: 'Atelier un' }, { message: 'Atelier deux' }])
+const items = ref([{message: 'Atelier un'}, {message: 'Atelier deux'}])
 
 </script>
 
@@ -36,15 +36,27 @@ export default {
     addAtelier() {
       fetch(API_LIST_ATELIER, {
         method: "POST",
+        mode: "cors",
+        cache: "no-cache",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET",
+          "Access-Control-Allow-Headers": "Content-Type"
         },
         body: JSON.stringify({
           "theme": this.themeAtelier,
           "nom": this.nomAtelier,
           "nbPlaces": this.nbPlacesAtelier
         })
-      });
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log('Erreur lors de la requête : ' + error);
+          });
     }
   },
   mounted() {
@@ -60,9 +72,12 @@ export default {
       <select v-model="this.themeAtelier">
         <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
       </select>
-      <input v-model="nomAtelier" type="text" placeholder="Nom de l'atelier" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <input v-model="nbPlacesAtelier" type="number" placeholder="Nombre de places" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <button @click="addAtelier" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter</button>
+      <input v-model="nomAtelier" type="text" placeholder="Nom de l'atelier"
+             class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+      <input v-model="nbPlacesAtelier" type="number" placeholder="Nombre de places"
+             class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+      <button @click="addAtelier" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter
+      </button>
 
 
       <p>{{ this.themeAtelier }}</p>
