@@ -55,6 +55,6 @@ jobs:
     - name: install sshpass
       run: sudo apt-get update && sudo apt-get install -y sshpass
     - name: Connect to Docketu
-      run:  sshpass -p ${{ secrets.UNIV_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.UNIV_LOGIN }}
+      run:  sudo sshpass -p ${{ secrets.UNIV_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.UNIV_LOGIN }}
       #@ docker pull thomasrbn/ccd_infra_api
     
