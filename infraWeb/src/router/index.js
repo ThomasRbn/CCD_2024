@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue';
+import HomeView from '@/views/HomeView.vue'
+import Prout from '@/views/Prout.vue'
 import Reservation from "@/views/Reservation.vue";
 import Page404 from '@/views/Page404.vue'
 import Atelier from "@/views/Atelier.vue";
@@ -27,6 +28,16 @@ const router = createRouter({
       path: '/voeux',
       name: 'voeux',
       component: Voeux
+    },
+    {
+        path: '/connexion',
+        name: 'connexion',
+        component: Connexion
+    },
+    {
+        path: '/modif',
+        name: 'modif',
+        component: AtelierModification
     },
     {
       path: '/:pathMatch(.*)',

@@ -9,7 +9,7 @@ export default {
       colors: {
         'green-boite': '#2fac66',
         'green-boite-light': '#8bd7ae',
-        'purple-boite': '#a83683',
+        'purple-boite': '#24643d', // a83683
       },
     },
   },
