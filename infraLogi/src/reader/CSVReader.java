@@ -48,11 +48,13 @@ public class CSVReader {
                         continue;
                     }
                     if (ateliersSection){
+                        System.out.println(row[0] + " " + row[1] + " " + row[2]);
                         Ateliers ateliers = new Ateliers(Integer.parseInt(row[0]), row[1], Integer.parseInt(row[2]));
                         donnees.ajouterAtelier(ateliers);
                     }
                     if (candidatsSection){
                         ArrayList<String> candidatures = new ArrayList<String>(Arrays.asList(row).subList(3, row.length));
+                        System.out.println(row[0] + " " + row[1] + " " + row[2] + " " + candidatures.toString());
                         Candidats candidats = new Candidats(Integer.parseInt(row[0]), row[1], Integer.parseInt(row[2]), candidatures);
                         donnees.ajouterCandidat(candidats);
                     }
