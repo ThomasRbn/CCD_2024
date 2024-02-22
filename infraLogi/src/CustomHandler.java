@@ -22,13 +22,11 @@ public class CustomHandler implements HttpHandler {
 
                 // Envoi de la réponse au client HTTP
                 exchange.sendResponseHeaders(200, 0);
+                OutputStream os = exchange.getResponseBody();
+                os.close();
 
                 // Appel de la fonction qui utilise le contenu du fichier CSV
-                String apiResponse = processCSV(csvContent.toString());
-
-                OutputStream os = exchange.getResponseBody();
-                os.write(apiResponse.getBytes());
-                os.close();
+                processCSV(csvContent.toString());
             } else {
                 // Si ce n'est pas une requête POST, renvoyer une réponse 405 (Méthode non autorisée)
                 exchange.sendResponseHeaders(405, -1);
@@ -40,7 +38,7 @@ public class CustomHandler implements HttpHandler {
         }
     }
 
-    private String processCSV(String csvContent) throws IOException {
+    private void processCSV(String csvContent) throws IOException {
         // Ici, vous pouvez traiter le contenu du fichier CSV comme vous le souhaitez
         // Vous pouvez par exemple effectuer une requête HTTP vers une autre API
         // Utilisez la classe HttpURLConnection pour cela
@@ -57,7 +55,7 @@ public class CustomHandler implements HttpHandler {
 
             // Envoyer le contenu du fichier CSV à l'API externe
             try (OutputStream os = connection.getOutputStream()) {
-                os.write(csvContent.getBytes());
+                os.write(csvCalcul.getBytes()); // Utiliser csvCalcul au lieu de csvContent
             }
 
             int responseCode = connection.getResponseCode();
@@ -71,14 +69,15 @@ public class CustomHandler implements HttpHandler {
                 }
                 reader.close();
 
-                // Retournez la réponse de l'API externe
-                return response.toString();
+                // Faites quelque chose avec la réponse si nécessaire
+                System.out.println("Réponse de l'API : " + response.toString());
             } else {
-                // Gérer les autres codes de réponse selon les besoins
-                return "Erreur lors de la communication avec l'API externe. Code de réponse : " + responseCode;
+                // Gérer les erreurs de réponse si nécessaire
+                System.out.println("Erreur de réponse de l'API : " + responseCode);
             }
         } finally {
             connection.disconnect();
         }
     }
+
 }
