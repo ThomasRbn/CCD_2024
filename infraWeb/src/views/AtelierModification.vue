@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 
-const items = ref([{ message: 'Atelier un' }, { message: 'Atelier deux' }])
+const items = ref([{message: 'Atelier un'}, {message: 'Atelier deux'}])
 
 </script>
 
@@ -44,7 +44,8 @@ export default {
           "nom": this.nomAtelier,
           "nbPlaces": this.nbPlacesAtelier
         })
-      });
+      })
+    },
     approuverDemande(items, index) {
       items.splice(index, 1)
       // API call to approve user
@@ -62,65 +63,42 @@ export default {
 
 <template>
 
-    <div class="w-1/2 p-6 border-r-2">
-      <div class="w-5/6 p-8 flex content-center flex-col">
-        <p class="font-bold text-2xl mb-4">Modification des ateliers</p>
-        <div v-if="verifyAdmin()">
-        <p>🟢 Connexion réussie</p>
-        <li v-for="(item, index) in items">
-          {{ index }} - {{ item.message }}
-          <button @click="supprimerAtelier(items, index)" class="bg-purple-boite rounded-lg p-1">Supprimer</button>
-        </li>
+  <div class="w-1/2 p-6 border-r-2">
+    <div class="w-5/6 p-8 flex content-center flex-col">
+      <div v-if="verifyAdmin()">
         <p class="font-bold text-2xl mb-4">Ajout d'un atelier</p>
+        <select v-model="this.themeAtelier">
+          <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+        </select>
         <input v-model="nomAtelier" type="text" placeholder="Nom de l'atelier"
                class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-        <input v-model="descriptionAtelier" type="text" placeholder="Description de l'atelier"
+        <input v-model="nbPlacesAtelier" type="number" placeholder="Nombre de places"
                class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-        <button @click="ajouterAtelier(items)"
-                class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter
+        <button @click="addAtelier" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">
+          Ajouter
         </button>
-        </div>
-        <div v-else>
-          <p>🔴 Vous n'avez pas les rôles nécessaires pour modifier les ateliers. Connectez-vous.</p>
-        </div>
+        <p>{{ this.themeAtelier }}</p>
+        <p>{{ this.nomAtelier }}</p>
+        <p>{{ this.nbPlacesAtelier }}</p>
+      </div>
+      <div v-else>
+        <p>🔴 Vous n'avez pas les rôles nécessaires pour modifier les ateliers. Connectez-vous.</p>
       </div>
     </div>
-    <div class="flex flex-row w-5/6 p-8">
-      <div class="w-1/2 p-6">
-        <p class="font-bold text-2xl mb-4">Affichage des utilisateurs affectés</p>
-        <div v-if="verifyAdmin()">
+  </div>
+  <div class="w-5/6 p-8 flex content-center flex-col h-screen">
+    <div class="w-1/2 p-6">
+      <p class="font-bold text-2xl mb-4">Affichage des utilisateurs affectés</p>
+      <div v-if="verifyAdmin()">
         <li v-for="(item, index) in items">
           {{ index }} - {{ item.message }}
-          <button @click="approuverDemande(items, index)" class="bg-purple-boite rounded-lg p-1">Approuver</button>
-          <button @click="rejeterDemande(items, index)" class="bg-purple-boite rounded-lg p-1">Rejeter</button>
+          <button @click="approuverDemande(items, index)" class="bg-green-boite rounded-lg p-1">Approuver</button>
+          <button @click="rejeterDemande(items, index)" class="bg-green-boite rounded-lg p-1">Rejeter</button>
         </li>
-        </div>
-        <div v-else>
-          <p>🔴 Vous n'avez pas les rôles nécessaires pour afficher les utilisateurs affectés. Connectez-vous.</p>
-        </div>
       </div>
-    </div>
-  <div class="w-5/6 p-8 flex content-center flex-col h-screen">
-    <div v-if="verifyAdmin()">
-      <p class="font-bold text-2xl mb-4">Ajout d'un atelier</p>
-      <select v-model="this.themeAtelier">
-        <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
-      </select>
-      <input v-model="nomAtelier" type="text" placeholder="Nom de l'atelier" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <input v-model="nbPlacesAtelier" type="number" placeholder="Nombre de places" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <button @click="addAtelier" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter</button>
-
-
-      <p>{{ this.themeAtelier }}</p>
-      <p>{{ this.nomAtelier }}</p>
-      <p>{{ this.nbPlacesAtelier }}</p>
-
-
-    </div>
-
-
-    <div v-else>
-      <p>🔴 Vous n'avez pas les rôles nécessaires pour être administrateur</p>
+      <div v-else>
+        <p>🔴 Vous n'avez pas les rôles nécessaires pour afficher les utilisateurs affectés. Connectez-vous.</p>
+      </div>
     </div>
   </div>
 
