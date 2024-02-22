@@ -17,27 +17,22 @@ use Symfony\Component\Routing\Attribute\Route;
 class JavaController extends AbstractController
 {
     #[Route('api/java/retour', name: 'java.post', methods: ['POST'])]
-    public function post(Request $request, EntityManagerInterface $entityManager, AtelierRepository $atelierRepository): JsonResponse
+    public function post(Request $request, EntityManagerInterface $entityManager, AtelierRepository $atelierRepository, UtilisateurRepository $utilisateurRepository): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $str1 = rtrim($data, ";");
-        $str2 = rtrim($str1, "\n");
-
-        $data = explode("\n", $str2);
-
-        foreach ($data as $line) {
-            $lineData = explode(";", $line);
-            $prenom = $lineData[1];
-            $codeAtelier = $lineData[2];
-
-            $atelier = $atelierRepository->findOneBy(['code' => $codeAtelier]);
-            $affectation = new Affectation();
-            $affectation->updateAffectation($atelier, $prenom);
-            $entityManager->persist($affectation);
+        $data = explode("\n", $data);
+        for ($i = 0; $i < count($data); $i++) {
+            $userid = explode(";", $data[$i])[0];
+            $email = explode(";", $data[$i])[1];
+            $affectations = [];
+            for ($j = 2; $j < count(explode(";", $data[$i])); $j++) {
+                $aff = new Affectation();
+                $aff->setAtelier($atelierRepository->findOneBy(['id' => explode(";", $data[$i])[$j]]));
+                $user = $utilisateurRepository->findOneBy(['id' => $userid]);
+                $aff->setUtilisateur($user);
+                $entityManager->persist($aff);
+            }
         }
-
-        $entityManager->flush();
-
         return new JsonResponse("Ok", 201);
 
     }

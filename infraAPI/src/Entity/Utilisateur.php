@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Utilisateur
 
     #[ORM\Column(type: Types::ARRAY)]
     private array $voeux = [];
+
+    #[ORM\ManyToOne(inversedBy: 'utilisateur')]
+    private ?Affectation $affectation = null;
+
+    #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'utilisateur')]
+    private Collection $affectations;
+
+    public function __construct()
+    {
+        $this->affectations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,6 +106,48 @@ class Utilisateur
     public function setVoeux(array $voeux): static
     {
         $this->voeux = $voeux;
+
+        return $this;
+    }
+
+    public function getAffectation(): ?Affectation
+    {
+        return $this->affectation;
+    }
+
+    public function setAffectation(?Affectation $affectation): static
+    {
+        $this->affectation = $affectation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Affectation>
+     */
+    public function getAffectations(): Collection
+    {
+        return $this->affectations;
+    }
+
+    public function addAffectation(Affectation $affectation): static
+    {
+        if (!$this->affectations->contains($affectation)) {
+            $this->affectations->add($affectation);
+            $affectation->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffectation(Affectation $affectation): static
+    {
+        if ($this->affectations->removeElement($affectation)) {
+            // set the owning side to null (unless already changed)
+            if ($affectation->getUtilisateur() === $this) {
+                $affectation->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

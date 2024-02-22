@@ -16,8 +16,9 @@ class Affectation
     #[ORM\ManyToOne(inversedBy: 'affectations')]
     private ?Atelier $atelier = null;
 
-    #[ORM\Column]
-    private ?string $utilisateur = null;
+    #[ORM\ManyToOne(inversedBy: 'affectations')]
+    private ?Utilisateur $utilisateur = null;
+
 
     public function getId(): ?int
     {
@@ -36,19 +37,8 @@ class Affectation
         return $this;
     }
 
-    public function getUtilisateur(): ?string
-    {
-        return $this->utilisateur;
-    }
 
-    public function setUtilisateur(?string $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    public function updateAffectation(Atelier $atelier, string $utilisateur): void
+    public function updateAffectation(Atelier $atelier, Utilisateur $utilisateur): void
     {
         $this->atelier = $atelier;
         $this->utilisateur = $utilisateur;
@@ -60,5 +50,17 @@ class Affectation
             'id' => $this->id,
             'atelier' => $this->atelier->toArray()
         ];
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
     }
 }
