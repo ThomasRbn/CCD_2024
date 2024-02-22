@@ -6,12 +6,12 @@ jobs:
     steps:
       - id: ssh
         uses: invi5H/ssh-action@v1
-        with:
+        env:
           SSH_HOST: docketu.iutnc.univ-lorraine.fr
           #SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USER: ${{ secrets.UNIV_LOGIN }}
           SSH_KEY: ${{ secrets.UNIV_RSA }}
-      - run: ssh ${{ steps.ssh.outputs.SERVER }} pwd
+     # - run: ssh ${{ steps.ssh.outputs.SERVER }} pwd
 
           
       - name: test 
