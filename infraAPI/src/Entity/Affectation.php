@@ -53,4 +53,12 @@ class Affectation
         $this->atelier = $atelier;
         $this->utilisateur = $utilisateur;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'atelier' => $this->atelier->toArray()
+        ];
+    }
 }
