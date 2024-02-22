@@ -49,6 +49,7 @@ public class CustomHandler implements HttpHandler {
 
         try {
             String csvCalcul = CSVWritter.write(csvContent);
+            System.out.println(csvCalcul);
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "text/csv");
