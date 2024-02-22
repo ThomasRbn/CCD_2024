@@ -43,9 +43,9 @@ jobs:
       - name: Debug Working Directory
         run: ls -la infraAPI
       - name: Update Dependencies
-        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
+        run: composer update --working-dir=infraAPI
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
+        run: composer install --working-dir=infraAPI
       - name: Wait for MariaDB to be ready
         run: dockerize -wait tcp://mariadb:3306 -timeout 60s
       - name: Create Database
