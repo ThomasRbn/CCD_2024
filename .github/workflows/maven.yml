@@ -33,7 +33,7 @@ jobs:
       working-directory: infraLogi/src/tst
     - name: Trigger Merge Workflow
       run: git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.actor }}@gmail.com"
+        git config user.email "menene12.akoo@gmail.com"
         
         git checkout master
         git merge --no-ff "${{ github.ref }}"
