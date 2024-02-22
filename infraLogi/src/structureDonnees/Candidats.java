@@ -40,5 +40,9 @@ public class Candidats {
         return ateliers.contains(atelier);
     }
 
+    public String getAtelier(int index) {
+        return ateliers.get(index);
+    }
+
 
 }
