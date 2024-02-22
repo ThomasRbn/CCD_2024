@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\AtelierRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -39,6 +40,6 @@ class JavaController extends AbstractController
     public function receive(Request $request): Response
     {
         $data = $request->getContent();
-        return new Response($data);
+        return new JsonResponse("oui", 200);
     }
 }
