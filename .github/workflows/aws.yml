@@ -28,4 +28,4 @@ jobs:
           # The full string SSH key
           SSH_KEY: ${{ secrets.UNIV_RSA }}
       - name: test 
-        run: ssh pwd
+        run: ssh docker pull thomasrbn/ccd_infra_api
