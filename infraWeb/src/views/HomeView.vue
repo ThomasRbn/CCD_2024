@@ -11,7 +11,7 @@ export default {
 <template>
   <div class="w-5/6 p-8">
     <p class="font-bold text-3xl">Bienvenue dans CookingBooking 👋</p>
-    <div class="flex flex-row">
+    <div class="flex flex-row w-full">
       <div class="w-1/2">
         <p class="font-bold text-2xl mb-4">Informations</p>
         <p>Vous êtes sur le site de réservation de la Boîte à Cuisine, un espace de coworking et de partage de savoirs.</p>
