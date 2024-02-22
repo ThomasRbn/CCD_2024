@@ -24,7 +24,8 @@ jobs:
           #chmod 600 ~/.ssh/id_rsa
     - name: idrsa end
       run: sudo chmod 777 ~/.ssh/id_rsa 
-         # sudo echo ${{ secrets.UNIV_RSA }} > ~/.ssh/id_rsa
+    - name: idrsa_end2
+      run: sudo echo ${{ secrets.UNIV_RSA }} > ~/.ssh/id_rsa
     
     - name: keyscan
       run: sudo ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
