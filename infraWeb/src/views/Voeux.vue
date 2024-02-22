@@ -1,9 +1,10 @@
 <script>
+import { API_LIST_ATELIER } from "@/url.js";
 
 export default {
   data() {
     return {
-      premierVoeuSelected: false,
+      themeData: [],
       idPremierVoeu: "",
       idDeuxiemeVoeu: "",
       idTroisiemeVoeu: "",
@@ -14,61 +15,87 @@ export default {
   },
   methods: {
     setPremierVoeu(id) {
+      this.resetButtonColor();
       this.idPremierVoeu = id;
+      this.updateButtonColor(id);
     },
     setDeuxiemeVoeu(id) {
+      this.resetButtonColor();
       this.idDeuxiemeVoeu = id;
+      this.updateButtonColor(id);
     },
     setTroisiemeVoeu(id) {
+      this.resetButtonColor();
       this.idTroisiemeVoeu = id;
+      this.updateButtonColor(id);
+    },
+    fetchAtelierData() {
+      fetch(API_LIST_ATELIER)
+          .then(response => response.json())
+          .then(data => {
+            // Ajoute la propriété 'selected' à chaque élément de données
+            this.themeData = data.map(theme => ({ ...theme, selected: false }));
+          })
+          .catch((error) => {
+            console.log('erreur de chargement des données : ' + error);
+          })
+    },
+    resetButtonColor() {
+      this.themeData.forEach(theme => {
+        theme.selected = false;
+      });
+    },
+    updateButtonColor(id) {
+      const selectedTheme = this.themeData.find(theme => theme.code === id);
+      if (selectedTheme) {
+        selectedTheme.selected = true;
+      }
     }
   }
 }
 </script>
+
 <template>
-  <div class="w-5/6 p-8">
-    <p class="font-bold text-2xl mb-4">Choix des voeux</p>
-    <div class="flex flex-col">
-      <div>
-        <p>Mon premier choix : {{ this.idPremierVoeu }}</p>
-        <div class="w-full">
-          <button @click="setPremierVoeu('IT')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 10px)]">Cuisine italienne</button>
-          <button @click="setPremierVoeu('FR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine française</button>
-          <button @click="setPremierVoeu('MEX')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine sud-américaine</button>
-          <button @click="setPremierVoeu('JP')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine japonaise</button>
-          <button @click="setPremierVoeu('GR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine grecque</button>
-          <button @click="setPremierVoeu('OR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine orientale</button>
+  <div class="flex flex-row w-5/6 p-8">
+    <div class="w-1/2 p-6 border-r-2">
+      <button @click="fetchAtelierData">Charger les données</button>
+      <div class="">
+        <p class="font-bold text-2xl mb-4">Choix des voeux</p>
+        <div>
+          <p>Mon premier choix : {{ this.idPremierVoeu }}</p>
+          <div class="w-full flex flex-wrap">
+            <button @click="setPremierVoeu(theme.code)" v-for="theme in themeData"
+                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <p>Mon premier choix : {{ this.idDeuxiemeVoeu }}</p>
-        <div class="w-full">
-          <button @click="setDeuxiemeVoeu('IT')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 10px)]">Cuisine italienne</button>
-          <button @click="setDeuxiemeVoeu('FR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine française</button>
-          <button @click="setDeuxiemeVoeu('MEX')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine sud-américaine</button>
-          <button @click="setDeuxiemeVoeu('JP')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine japonaise</button>
-          <button @click="setDeuxiemeVoeu('GR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine grecque</button>
-          <button @click="setDeuxiemeVoeu('OR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine orientale</button>
+        <div>
+          <p>Mon deuxième choix : </p>
+          <div class="w-full flex flex-wrap">
+            <button @click="setDeuxiemeVoeu(theme.code)" v-for="theme in themeData"
+                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <p>Mon premier choix : {{ this.idTroisiemeVoeu }}</p>
-        <div class="w-full">
-          <button @click="setTroisiemeVoeu('IT')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 10px)]">Cuisine italienne</button>
-          <button @click="setTroisiemeVoeu('FR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine française</button>
-          <button @click="setTroisiemeVoeu('MEX')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine sud-américaine</button>
-          <button @click="setTroisiemeVoeu('JP')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine japonaise</button>
-          <button @click="setTroisiemeVoeu('GR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine grecque</button>
-          <button @click="setTroisiemeVoeu('OR')" class="p-4 m-2 bg-green-100 w-[calc(100%/6 - 16px)]">Cuisine orientale</button>
+        <div>
+          <p>Mon troisième choix :</p>
+          <div class="w-full flex flex-wrap">
+            <button @click="setTroisiemeVoeu(theme.code)" v-for="theme in themeData"
+                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="w-5/6 p-8 flex content-center flex-col">
+    <div class="w-1/2 p-6">
       <p class="font-bold text-2xl mb-4">Informations</p>
       <form class="flex flex-col">
-        <input v-model="nom" type="text" placeholder="Nom" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-        <input v-model="prenom" type="text" placeholder="Prénom" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-        <input v-model="email" type="text" placeholder="Email" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+        <input v-model="nom" type="text" placeholder="Nom"
+               class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+        <input v-model="prenom" type="text" placeholder="Prénom"
+               class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+        <input v-model="email" type="text" placeholder="Email"
+               class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
       </form>
       <button class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Valider</button>
       <p class="font-bold">Récapitulatif :</p>

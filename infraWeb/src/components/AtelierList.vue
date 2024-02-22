@@ -8,18 +8,6 @@ export default {
       atelierData: ""
     }
   },
-  methods: {
-    fetchAtelierData() {
-      fetch(API_LIST_ATELIER)
-          .then(response => response.json())
-          .then(data => {
-            this.atelierData = data;
-          })
-          .catch((error) => {
-            console.log('erreur de chargement des données : ' + error);
-          })
-    },
-  }
 }
 </script>
 <template>
@@ -34,7 +22,7 @@ export default {
         vehicula felis. Duis nisi metus, viverra et finibus nec, porta in erat. Quisque enim sem, convallis eu
         diam.
       </p>
-      <RouterLink :to="/atelier/ + this.idIt">
+      <RouterLink :to="/atelier/ + atelier.id">
         <button class="bg-[#36A862] text-white p-2">Voir les détails</button>
       </RouterLink>
     </div>
