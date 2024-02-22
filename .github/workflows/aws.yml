@@ -28,7 +28,7 @@ jobs:
       run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
     
     - name: keyscan
-      run: sudo ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
+      run: ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
     - name: connect ssh
       run: sudo ssh ${{ secrets.UNIV_LOGIN }}@docketu.iutnc.univ-lorraine.fr -i ${{ secrets.UNIV_RSA }}
       #@ docker pull thomasrbn/ccd_infra_api
