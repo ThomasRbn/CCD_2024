@@ -18,12 +18,12 @@ jobs:
       run: mkdir  ~/.ssh
     - name: test
       run: ls -l ~/.*
-    - name: idrsa
-      run: sudo touch ~/.ssh/id_rsa    
+   # - name: idrsa
+    #  run: sudo touch ~/.ssh/id_rsa    
          # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
           #chmod 600 ~/.ssh/id_rsa
     - name: idrsa end
-      run: sudo echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
+      run: sudo echo ${{ secrets.UNIV_RSA }} > ~/.ssh/id_rsa
     
     - name: keyscan
       run: sudo ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
