@@ -14,18 +14,18 @@ jobs:
     steps:
    # - name: install sshpass
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
-    - name: create .ssh
-      run: mkdir  ~/.ssh
-    - name: test
-      run: ls -l ~/.*
-    - name: idrsa
-      run: sudo touch ~/.ssh/id_rsa    
+  #  - name: create .ssh
+   #   run: mkdir  ~/.ssh
+   # - name: test
+    #  run: ls -l ~/.*
+    #- name: idrsa
+     # run: sudo touch ~/.ssh/id_rsa    
          # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
           #chmod 600 ~/.ssh/id_rsa
-    - name: idrsa end
-      run: sudo chmod 777 ~/.ssh/id_rsa 
-    - name: idrsa_end2
-      run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
+   # - name: idrsa end
+    #  run: sudo chmod 777 ~/.ssh/id_rsa 
+    #- name: idrsa_end2
+     # run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
     ###############
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
@@ -33,7 +33,7 @@ jobs:
          host: docketu.iutnc.univ-lorraine.fr
          username: ${{ secrets.UNIV_LOGIN }}
          key: ${{ secrets.UNIV_RSA }}
-         password: ${{ secrets.PASSWORD }}
+         password: ${{ secrets.UNIV_PASSWORD }}
          #port: 22
          script: whoami
          #script: docker pull thomasrbn/ccd_infra_api
