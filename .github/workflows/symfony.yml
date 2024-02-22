@@ -12,35 +12,32 @@ permissions:
 jobs:
     symfony-tests:
         runs-on: ubuntu-latest
-        steps:
-            # To automatically get bug fixes and new Php versions for shivammathur/setup-php,
-            # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
-            # uses: shivammathur/setup-php@v2
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
-                with:
-                    php-version: '8.3'
-            -   uses: actions/checkout@v3
-            -   name: Cache Composer packages
-                id: composer-cache
-                uses: actions/cache@v3
-                with:
-                    path: vendor
-                    key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: |
-                        ${{ runner.os }}-php-
-            -   name: Install Dependencies
-                working-directory: infraAPI
-                run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-            -   name: Start containers
-                working-directory: infraAPI
-                run: docker-compose -f docker-compose.yml up -d
-            -   name: Create Database
-                working-directory: infraAPI
-                run: |
-                    php bin/console doctrine:database:create --if-not-exists
-                    php bin/console doctrine:schema:update --force
-            -   name: Execute tests (Unit and Feature tests) via PHPUnit
+        services:
+            mariadb:
+                image: mariadb:latest
                 env:
-                    DATABASE_URL: 'mysql://symfony_user:symfony_password@mariadb:3306/symfony_test'
-                run: vendor/bin/phpunit
+                    MYSQL_ROOT_USER: root
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_USER: admin
+                    MYSQL_PASSWORD: admin
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        steps:
+            - name: Setup PHP
+              uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
+              with:
+                  php-version: '8.3'
+            - uses: actions/checkout@v3
+            - name: Cache Composer packages
+              id: composer-cache
+              uses: actions/cache@v3
+              with:
+                  path: vendor
+                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-php-
+            - name: Install Dependencies
+              run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            - name: Run Symfony Tests
+              run: php bin/console doctrine:database:create --if-not-exists
