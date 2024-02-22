@@ -28,7 +28,7 @@ jobs:
       run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
     ###############
     - name: executing remote ssh commands using password
-      uses: actions/checkout@v1
+      uses: appleboy/ssh-action@v1.0.3
       with:
          host: docketu.iutnc.univ-lorraine.fr
          username: ${{ secrets.UNIV_LOGIN }}
