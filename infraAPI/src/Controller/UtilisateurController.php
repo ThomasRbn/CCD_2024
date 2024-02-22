@@ -33,6 +33,12 @@ class UtilisateurController extends AbstractController
         $entityManager->persist($utilisateur);
         $entityManager->flush();
 
-        return new JsonResponse($utilisateur->toArray(), 201);
+        // Ajouter les en-têtes CORS
+        $response = new JsonResponse($utilisateur->toArray(), 200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+
+        return $response;
     }
 }
