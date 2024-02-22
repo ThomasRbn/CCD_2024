@@ -9,7 +9,7 @@ services:
     volumes:
       - ./docker/mysql_data:/var/lib/mysql
 
-  # Service phpMyAdmin
+  # service phpMyAdmin
   phpmyadmin:
     image: phpmyadmin:latest
     links:
