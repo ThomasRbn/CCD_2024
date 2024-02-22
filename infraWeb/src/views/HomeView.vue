@@ -2,5 +2,7 @@
 </script>
 
 <template>
-<p>Bonjour</p>
+  <div class="w-5/6 p-8">
+    <p>Bonjour</p>
+  </div>
 </template>
