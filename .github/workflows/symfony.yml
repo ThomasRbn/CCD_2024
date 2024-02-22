@@ -39,4 +39,4 @@ jobs:
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
             - name: Run Symfony Tests
-              run: php bin/console doctrine:database:create --if-not-exists
+              run: php infraAPI/bin/console doctrine:database:create --if-not-exists
