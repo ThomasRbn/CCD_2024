@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class JavaController extends AbstractController
 {
-    #[Route('api/java', name: 'java.post', methods: ['POST'])]
+    #[Route('api/java/retour', name: 'java.post', methods: ['POST'])]
     public function post(Request $request, EntityManagerInterface $entityManager, AtelierRepository $atelierRepository): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -44,7 +44,7 @@ class JavaController extends AbstractController
     #[Route('/api/java/envoi', name: 'app_java')]
     public function index(AtelierRepository $atelierRepository, UtilisateurRepository $utilisateurRepository, HttpClient $client): Response
     {
-        $client->request('POST', 'http://docketu.iutnc.univ-lorraine.fr:8082/voeux', [
+        $client->request('POST', 'localhost:8082/optimisation', [
             'body' => $this->createCSV($atelierRepository, $utilisateurRepository)
         ]);
         return new JsonResponse("oui", 200);
