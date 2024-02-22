@@ -34,7 +34,7 @@ public class BFS {
     }
 
     public boolean solve() {
-        System.out.println("Algo choisi: BFS");
+        //System.out.println("Algo choisi: BFS");
         ProblemeEtat node = intial_state;
 
         // On commence à l'état initial
@@ -55,20 +55,20 @@ public class BFS {
             }else {
                 // On ajoute l'état du noeud dans l'ensemble des noeuds explorés
                 explored.add(node);
-                System.out.println(node);
+                //System.out.println(node);
 
                 // Les actions possibles depuis cet état
                 ArrayList<Action> actions = problem.getActions(node);
 
                 // Affichage des actions
                 for (Action a : actions) {
-                    System.out.println(a);
+                    //System.out.println(a);
                 }
-                System.out.println("");
+                //System.out.println("");
 
                 // Pour chaque nœud enfant
                 for (Action a : actions) {
-                    System.out.println(a);
+                    //System.out.println(a);
                     // Nœud enfant
                     ProblemeEtat child = problem.executer(node, a);
 
@@ -95,6 +95,8 @@ public class BFS {
         });
         return final_nodes.get(0);
     }
+
+
 
 
 }

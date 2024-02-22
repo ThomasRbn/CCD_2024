@@ -33,4 +33,8 @@ public class ProblemeEtat {
     public int getScore(){
         return donnees.calculerScore();
     }
+
+    public Donnees getDonnees() {
+        return donnees;
+    }
 }

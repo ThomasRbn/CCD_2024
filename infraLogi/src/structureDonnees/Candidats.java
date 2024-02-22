@@ -90,4 +90,16 @@ public class Candidats {
     public int getNbDemande() {
         return nbDemande;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public ArrayList<String> getAteliers() {
+        return ateliers;
+    }
 }
