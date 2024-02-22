@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         'green-boite': '#2fac66',
+        'green-boite-light': '#8bd7ae',
         'purple-boite': '#a83683',
       },
     },

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import Prout from '@/views/Prout.vue'
+import Reservation from "@/views/Reservation.vue";
 import Page404 from '@/views/Page404.vue'
 import Atelier from "@/views/Atelier.vue";
 
@@ -14,8 +15,13 @@ const router = createRouter({
     },
     {
       path: '/prout',
-      name: 'prout',
+      name: 'Prout',
       component: Prout
+    },
+    {
+      path: '/reservation',
+      name: 'Reservation',
+      component: Reservation
     },
     {
       path: '/atelier/:id',
