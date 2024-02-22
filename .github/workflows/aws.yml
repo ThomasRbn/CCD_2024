@@ -34,7 +34,8 @@ jobs:
          username: ${{ secrets.UNIV_LOGIN }}
          password: ${{ secrets.UNIV_PASSWORD }}
          port: 22
-         script: docker pull thomasrbn/ccd_infra_api
+         script: whoami
+         #script: docker pull thomasrbn/ccd_infra_api
     ###############
     #- name: keyscan
      # run: ssh-keyscan -H "docketu.iutnc.univ-lorraine.fr" >> ~/.ssh/known_hosts
