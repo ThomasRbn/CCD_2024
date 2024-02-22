@@ -22,7 +22,7 @@ export default defineComponent({
     </div>
     <div class="nav-links">
       <RouterLink to='/connexion' class="nav-link">Connexion</RouterLink>
-      <RouterLink to='/modif' class="nav-link">Modification</RouterLink>
+      <RouterLink to='/modif' class="nav-link">Administrateur</RouterLink>
     </div>
   </header>
 </template>

@@ -3,8 +3,9 @@
 
     <section class="hero-section">
       <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">Boîte à cuisine située à Nancy ! 🍽️</h1>
+        <div class="hero-content flex justify-center flex-col items-center">
+          <h1 class="hero-title font-semibold">Boîte à cuisine située à Nancy ! 🍽️</h1>
+          <img src="/img/AARS.png" class="drop-shadow-xl w-40" alt="Atelier de cuisine">
           <p class="hero-description">Découvrez nos prochains ateliers culinaires et réservez votre place dès maintenant.</p>
         </div>
       </div>
