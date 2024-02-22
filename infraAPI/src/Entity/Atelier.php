@@ -15,25 +15,15 @@ class Atelier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    #[ORM\ManyToOne(inversedBy: 'atelier')]
+    private ?Theme $theme = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $code = null;
-
-    #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'atelier')]
-    private Collection $cours;
+    #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'atelier')]
+    private Collection $affectations;
 
     public function __construct()
     {
-        $this->cours = new ArrayCollection();
-    }
-
-
-    public function updateAtelier(string $nom, string $code): void
-    {
-        $this->nom = $nom;
-        $this->code = $code;
+        $this->affectations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -41,53 +31,45 @@ class Atelier
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTheme(): ?Theme
     {
-        return $this->nom;
+        return $this->theme;
     }
 
-    public function getCode(): ?string
+    public function setTheme(?Theme $theme): static
     {
-        return $this->code;
-    }
+        $this->theme = $theme;
 
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'nom' => $this->nom,
-            'code' => $this->code,
-        ];
+        return $this;
     }
 
     /**
-     * @return Collection<int, Cours>
+     * @return Collection<int, Affectation>
      */
-    public function getCours(): Collection
+    public function getAffectations(): Collection
     {
-        return $this->cours;
+        return $this->affectations;
     }
 
-    public function addCours(Cours $cour): static
+    public function addAffectation(Affectation $affectation): static
     {
-        if (!$this->cours->contains($cour)) {
-            $this->cours->add($cour);
-            $cour->setAtelier($this);
+        if (!$this->affectations->contains($affectation)) {
+            $this->affectations->add($affectation);
+            $affectation->setAtelier($this);
         }
 
         return $this;
     }
 
-    public function removeCours(Cours $cour): static
+    public function removeAffectation(Affectation $affectation): static
     {
-        if ($this->cours->removeElement($cour)) {
+        if ($this->affectations->removeElement($affectation)) {
             // set the owning side to null (unless already changed)
-            if ($cour->getAtelier() === $this) {
-                $cour->setAtelier(null);
+            if ($affectation->getAtelier() === $this) {
+                $affectation->setAtelier(null);
             }
         }
 
         return $this;
     }
-
 }

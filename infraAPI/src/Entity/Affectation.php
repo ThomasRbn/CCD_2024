@@ -14,21 +14,21 @@ class Affectation
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'affectations')]
-    private ?Cours $cours = null;
+    private ?Atelier $atelier = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCours(): ?Cours
+    public function getAtelier(): ?Atelier
     {
-        return $this->cours;
+        return $this->atelier;
     }
 
-    public function setCours(?Cours $cours): static
+    public function setAtelier(?Atelier $atelier): static
     {
-        $this->cours = $cours;
+        $this->atelier = $atelier;
 
         return $this;
     }

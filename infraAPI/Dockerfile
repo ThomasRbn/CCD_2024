@@ -11,6 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Installation de symfony
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 RUN apt-get install -y symfony-cli
+RUN docker-php-ext-install mysqli pdo_mysql
 
 # Définition de la variable d'environnement COMPOSER_ALLOW_SUPERUSER
 ENV COMPOSER_ALLOW_SUPERUSER=1
