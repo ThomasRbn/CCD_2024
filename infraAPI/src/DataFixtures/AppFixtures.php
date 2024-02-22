@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Atelier;
+use App\Entity\Theme;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -22,9 +24,9 @@ class AppFixtures extends Fixture
 
         // créer 4 utilisateurs de test
         for ($i = 0; $i < 4; $i++) {
-            $utilisateur = new Utilisateur();
-            $utilisateur->updateUtilisateur('utilisateur' . $i, 'utilisateur' . $i . '@gmail.com', 'utilisateur' . $i);
-            $manager->persist($utilisateur);
+            $utilisateurs = new Utilisateur();
+            $utilisateurs->updateUtilisateur('utilisateur' . $i, 'utilisateur' . $i . '@gmail.com', 'utilisateur' . $i);
+            $manager->persist($utilisateurs);
         }
 
 
