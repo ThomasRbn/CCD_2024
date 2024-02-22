@@ -15,4 +15,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file ~/CCD_2024/infraAPI/Dockerfile --tag thomasrbn/ccd_infra_api:latest
+      run: docker build . --tag thomasrbn/ccd_infra_api:latest
+      working-directory: infraAPI/
+    - name: Docker Build & Push to Docker Hub
+      uses: timzu/github-actions-docker@master
+      with:
+          args: --docker
+      env:
+          USERNAME: ${{ secrets.HUB_LOGIN }}
+          PASSWORD: ${{ secrets.HUB_PASSWORD }}
+          DOCKERFILE: "Dockerfile"
+          IMAGE_NAME: "thomasrbn/ccd_infra_api"
+          TAG_NAME: "latest"
+          LATEST: "true"
