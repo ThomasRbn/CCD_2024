@@ -4,6 +4,8 @@ import Prout from '@/views/Prout.vue'
 import Reservation from "@/views/Reservation.vue";
 import Page404 from '@/views/Page404.vue'
 import Atelier from "@/views/Atelier.vue";
+import Connexion from "@/views/Connexion.vue";
+import AtelierModification from "@/views/AtelierModification.vue";
 import Voeux from "@/views/Voeux.vue"
 
 const router = createRouter({
@@ -33,6 +35,16 @@ const router = createRouter({
       path: '/voeux',
       name: 'voeux',
       component: Voeux
+    },
+    {
+        path: '/connexion',
+        name: 'connexion',
+        component: Connexion
+    },
+    {
+        path: '/modif',
+        name: 'modif',
+        component: AtelierModification
     },
     {
       path: '/:pathMatch(.*)',

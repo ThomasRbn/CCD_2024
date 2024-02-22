@@ -14,7 +14,7 @@
     <RouterLink to='/about' class="bg-green-boite hover:bg-purple-boite text-white font-bold py-2 px-4 rounded drop-shadow-md m-1 transition duration-500 ease-out">
       About
     </RouterLink>
-    <RouterLink to='/voeux' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded drop-shadow-md m-1">
+    <RouterLink to='/voeux' class="bg-green-boite hover:bg-green-boite text-white font-bold py-2 px-4 rounded drop-shadow-md m-1">
       Mes voeux
     </RouterLink>
   </nav>
