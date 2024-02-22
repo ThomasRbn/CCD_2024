@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Affectation;
 use App\Entity\Atelier;
 use App\Repository\AtelierRepository;
+use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,9 +42,12 @@ class JavaController extends AbstractController
 
     }
     #[Route('/api/java/envoi', name: 'app_java')]
-    public function index(AtelierRepository $atelierRepository, UtilisateurRepository $utilisateurRepository): Response
+    public function index(AtelierRepository $atelierRepository, UtilisateurRepository $utilisateurRepository, HttpClient $client): Response
     {
-        return new Response($this->createCSV($atelierRepository, $utilisateurRepository));
+        $client->request('POST', 'http://docketu.iutnc.univ-lorraine.fr:8082/voeux', [
+            'body' => $this->createCSV($atelierRepository, $utilisateurRepository)
+        ]);
+        return new JsonResponse("oui", 200);
     }
 
     public function createCSV(AtelierRepository $atelierRepository, UtilisateurRepository $utilisateurRepository): string
@@ -60,12 +66,5 @@ class JavaController extends AbstractController
             $csv .= $utilisateur->getId() . ";" . $utilisateur->getEmail() . ";" . count($utilisateur->getVoeux()) . ";" . $utilisateur->getVoeux()[0] . ";" . $utilisateur->getVoeux()[1] . ";" . $utilisateur->getVoeux()[2] . ";" . $utilisateur->getVoeux()[3] . ";" . $utilisateur->getVoeux()[4] . ";" . $utilisateur->getVoeux()[5] . ";\n";
         }
         return $csv;
-    }
-
-    #[Route('/api/java/retour', name: 'app_java')]
-    public function receive(Request $request): Response
-    {
-        $data = $request->getContent();
-        return new JsonResponse("oui", 200);
     }
 }
