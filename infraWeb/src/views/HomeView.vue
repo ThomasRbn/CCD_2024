@@ -301,6 +301,23 @@ export default {
   margin-right: 10px;
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.home-view{
+  animation: slideUp 1s cubic-bezier(0,0,0,1);
+  padding: 20px 0;
+  width: 100%;
+  margin-left: 35px;
+}
 
 .hero-section {
   background-color: #f9f9f9;
