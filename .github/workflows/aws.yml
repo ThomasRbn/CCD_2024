@@ -26,7 +26,16 @@ jobs:
       run: sudo chmod 777 ~/.ssh/id_rsa 
     - name: idrsa_end2
       run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
-    
+    ###############
+    - name: executing remote ssh commands using password
+      uses: actions/checkout@v1
+      with:
+         host: docketu.iutnc.univ-lorraine.fr
+         username: ${{ secrets.UNIV_LOGIN }}
+         password: ${{ secrets.UNIV_PASSWORD }}
+         port: 22
+         script: echo  "heyé"
+    ###############
     - name: keyscan
       run: ssh-keyscan -H "docketu.iutnc.univ-lorraine.fr" >> ~/.ssh/known_hosts
     - name: connect ssh
