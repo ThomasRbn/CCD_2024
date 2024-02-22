@@ -14,21 +14,6 @@ export default {
     }
   },
   methods: {
-    setPremierVoeu(id) {
-      this.resetButtonColor();
-      this.idPremierVoeu = id;
-      this.updateButtonColor(id);
-    },
-    setDeuxiemeVoeu(id) {
-      this.resetButtonColor();
-      this.idDeuxiemeVoeu = id;
-      this.updateButtonColor(id);
-    },
-    setTroisiemeVoeu(id) {
-      this.resetButtonColor();
-      this.idTroisiemeVoeu = id;
-      this.updateButtonColor(id);
-    },
     fetchAtelierData() {
       fetch(API_LIST_ATELIER)
           .then(response => response.json())
@@ -39,17 +24,9 @@ export default {
             console.log('erreur de chargement des données : ' + error);
           })
     },
-    resetButtonColor() {
-      this.themeData.forEach(theme => {
-        theme.selected = false;
-      });
-    },
-    updateButtonColor(id) {
-      const selectedTheme = this.themeData.find(theme => theme.code === id);
-      if (selectedTheme) {
-        selectedTheme.selected = true;
-      }
-    }
+  },
+  mounted() {
+    this.fetchAtelierData();
   }
 }
 </script>
@@ -57,7 +34,6 @@ export default {
 <template>
   <div class="flex flex-row w-5/6 p-8">
     <div class="w-1/2 p-6 border-r-2">
-      <button @click="fetchAtelierData">Charger les données</button>
       <div class="">
         <p class="font-bold text-2xl mb-4">Choix des voeux</p>
         <div>
