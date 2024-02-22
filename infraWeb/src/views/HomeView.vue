@@ -3,7 +3,7 @@ import AtelierList from "@/components/AtelierList.vue";
 
 export default {
   components: {
-    'AtelierList' : AtelierList
+    AtelierList
   }
 }
 </script>
