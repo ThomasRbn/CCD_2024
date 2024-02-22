@@ -55,6 +55,6 @@ jobs:
    # - name: install sshpass
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
     - name: Connect to Docketu
-      run: ssh -i ${{ secrets.UNIV_RSA }} ${{ secrets.UNIV_LOGIN }}@docketu.iutnc.univ-lorraine.fr echo 'hey'
+      run: ssh -i ${{ secrets.UNIV_RSA }} ${{ secrets.UNIV_LOGIN }}@docketu.iutnc.univ-lorraine.fr
       #@ docker pull thomasrbn/ccd_infra_api
     
