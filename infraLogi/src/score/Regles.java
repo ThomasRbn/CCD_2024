@@ -20,10 +20,8 @@ public class Regles {
                 return 4;
             case 5:
                 return 2;
-            case 6:
-                return 1;
             default:
-                return 0;
+                return 1;
         }
     }
 }
