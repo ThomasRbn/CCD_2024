@@ -57,6 +57,14 @@ export default {
           .catch((error) => {
             console.log('Erreur lors de la requête : ' + error);
           });
+    },
+    approuverDemande(items, index) {
+      items.splice(index, 1)
+      // API call to approve user
+    },
+    rejeterDemande(items, index) {
+      items.splice(index, 1)
+      // API call to reject user
     }
   },
   mounted() {

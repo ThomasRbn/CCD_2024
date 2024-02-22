@@ -3,8 +3,9 @@
 
     <section class="hero-section">
       <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">Boîte à cuisine située à Nancy ! 🍽️</h1>
+        <div class="hero-content flex justify-center flex-col items-center">
+          <h1 class="hero-title font-semibold">Boîte à cuisine située à Nancy ! 🍽️</h1>
+          <img src="/img/AARS.png" class="drop-shadow-xl w-40" alt="Atelier de cuisine">
           <p class="hero-description">Découvrez nos prochains ateliers culinaires et réservez votre place dès maintenant.</p>
         </div>
       </div>
@@ -300,6 +301,23 @@ export default {
   margin-right: 10px;
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.home-view{
+  animation: slideUp 1s cubic-bezier(0,0,0,1);
+  padding: 20px 0;
+  width: 100%;
+  margin-left: 35px;
+}
 
 .hero-section {
   background-color: #f9f9f9;

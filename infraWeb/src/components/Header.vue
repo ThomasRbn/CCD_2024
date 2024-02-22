@@ -14,6 +14,7 @@ export default defineComponent({
 })
 
 </script>
+
 <template>
   <header class="header">
     <div @click="goHome" class="logo-container rounded-2xl bg-white pl-1 pr-1 cursor-pointer transition duration-300 ease-in-out transform hover:drop-shadow-md">
@@ -21,8 +22,9 @@ export default defineComponent({
       <h1 class="site-title">CookingBooking</h1>
     </div>
     <div class="nav-links">
+      <RouterLink to='/displayAffect' class="nav-link">Voir Affectations</RouterLink>
       <RouterLink to='/connexion' class="nav-link">Connexion</RouterLink>
-      <RouterLink to='/modif' class="nav-link">Modification</RouterLink>
+      <RouterLink to='/modif' class="nav-link">Administrateur</RouterLink>
     </div>
   </header>
 </template>
