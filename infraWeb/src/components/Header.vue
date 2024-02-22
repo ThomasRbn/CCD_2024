@@ -1,6 +1,6 @@
 <script>
-import { RouterLink } from 'vue-router'
 import { defineComponent } from 'vue'
+import { RouterLink } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -9,10 +9,12 @@ export default defineComponent({
   methods: {
     goHome() {
       this.$router.push('/')
+    },
+    goToAcceptation() {
+      this.$router.push('/acceptation')
     }
   }
 })
-
 </script>
 
 <template>
@@ -22,7 +24,8 @@ export default defineComponent({
       <h1 class="site-title">CookingBooking</h1>
     </div>
     <div class="nav-links">
-      <RouterLink to='/displayAffect' class="nav-link">Voir Affectations</RouterLink>
+      <RouterLink to='/displayAffect' class="nav-link">Voir affectations</RouterLink>
+      <RouterLink to='/acceptAffect' class="nav-link">Accepter affectations</RouterLink>
       <RouterLink to='/connexion' class="nav-link">Connexion</RouterLink>
       <RouterLink to='/modif' class="nav-link">Administrateur</RouterLink>
     </div>

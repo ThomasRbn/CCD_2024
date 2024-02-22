@@ -7,6 +7,7 @@ import AtelierModification from "@/views/AtelierModification.vue";
 import Connexion from "@/views/Connexion.vue";
 import APropos from "@/views/APropos.vue";
 import DisplayAffect from "@/views/DisplayAffectations.vue";
+import AcceptAffect from "@/views/AcceptAffectations.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,11 @@ const router = createRouter({
       path: '/displayAffect',
       name: 'displayAffect',
       component: DisplayAffect
+    },
+    {
+      path: '/acceptAffect',
+      name: 'acceptAffect',
+      component: AcceptAffect,
     }
   ]
 })
