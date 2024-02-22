@@ -7,41 +7,72 @@ const items = ref([{ message: 'Atelier un' }, { message: 'Atelier deux' }])
 
 <script>
 import {createRouter as items} from "vue-router";
+import {API_LIST_ATELIER, API_LIST_THEME} from "@/url.js";
 
 export default {
   data() {
     return {
       nomAtelier: "",
-      descriptionAtelier: ""
+      nbPlacesAtelier: "",
+      themeAtelier: "",
+      themeData: ""
     }
   },
   methods: {
     verifyAdmin() {
       return (document.cookie === "admin=true");
     },
-    supprimerAtelier(items, index) {
-      items.splice(index, 1)
+    fetchThemeData() {
+      fetch(API_LIST_THEME)
+          .then(response => response.json())
+          .then(data => {
+            this.themeData = data;
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log('erreur de chargement des données : ' + error);
+          })
     },
-    ajouterAtelier(items) {
-      items.push({message: this.nomAtelier + ' : ' + this.descriptionAtelier})
+    addAtelier() {
+      fetch(API_LIST_ATELIER, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "theme": this.themeAtelier,
+          "nom": this.nomAtelier,
+          "nbPlaces": this.nbPlacesAtelier
+        })
+      });
     }
+  },
+  mounted() {
+    this.fetchThemeData();
   }
 }
 </script>
 
 <template>
-  <div class="w-5/6 p-8 flex content-center flex-col">
-    <p class="font-bold text-2xl mb-4">Modification des ateliers</p>
+  <div class="w-5/6 p-8 flex content-center flex-col h-screen">
     <div v-if="verifyAdmin()">
-      <p>🟢 Connexion réussie</p>
-      <li v-for="(item, index) in items">
-        {{ index }} - {{ item.message }} <button @click="supprimerAtelier(items, index)" class="bg-purple-boite rounded-lg p-1">Supprimer</button>
-      </li>
       <p class="font-bold text-2xl mb-4">Ajout d'un atelier</p>
+      <select v-model="this.themeAtelier">
+        <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+      </select>
       <input v-model="nomAtelier" type="text" placeholder="Nom de l'atelier" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <input v-model="descriptionAtelier" type="text" placeholder="Description de l'atelier" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
-      <button @click="ajouterAtelier(items)" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter</button>
+      <input v-model="nbPlacesAtelier" type="number" placeholder="Nombre de places" class="border-2 border-green-boite-light rounded-lg p-2 m-2"/>
+      <button @click="addAtelier" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter</button>
+
+
+      <p>{{ this.themeAtelier }}</p>
+      <p>{{ this.nomAtelier }}</p>
+      <p>{{ this.nbPlacesAtelier }}</p>
+
+
     </div>
+
+
     <div v-else>
       <p>🔴 Vous n'avez pas les rôles nécessaires pour être administrateur</p>
     </div>
