@@ -2,7 +2,7 @@ name: Symfony
 
 on:
   push:
-    branches: [ "InfraAPI" ]
+    branches: [ "infraAPI" ]
   pull_request:
     branches: [ "master" ]
 
