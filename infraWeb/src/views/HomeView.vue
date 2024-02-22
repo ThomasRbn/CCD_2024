@@ -1,11 +1,9 @@
 <template>
   <div class="home-view">
-
     <section class="hero-section">
       <div class="container">
-        <div class="hero-content flex justify-center flex-col items-center">
-          <h1 class="hero-title font-semibold">Boîte à cuisine située à Nancy ! 🍽️</h1>
-          <img src="/img/AARS.png" class="drop-shadow-xl w-40" alt="Atelier de cuisine">
+        <div class="hero-content">
+          <h1 class="hero-title">Boîte à cuisine située à Nancy !</h1>
           <p class="hero-description">Découvrez nos prochains ateliers culinaires et réservez votre place dès maintenant.</p>
         </div>
       </div>
@@ -16,14 +14,11 @@
       <div class="container">
         <h2 class="section-title">Liste des ateliers</h2>
         <div class="ateliers">
-
           <!-- Boucle pour afficher chaque atelier -->
           <div v-for="atelier in paginatedAteliers" :key="atelier.id" class="atelier-card" @click="showDetails(atelier)">
-            <p class="font-bold text-xl">{{ atelier.nom }}</p>
-            <p class="italic">{{ atelier.theme.nom }}</p>
-            <p>Places restantes : {{ atelier.nbPlaces }}</p>
+            <img :src="`/img/${atelier.photo}`" :alt="atelier.nom" class="atelier-image">
+            <h3>{{ atelier.nom }}</h3>
           </div>
-
         </div>
         <div class="pagination">
           <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn">Précédent</button>
@@ -36,7 +31,6 @@
 
 <script>
 import Atelier from '@/components/Atelier.vue';
-import {API_LIST_ATELIER} from "@/url.js";
 
 export default {
   components: {
@@ -44,12 +38,11 @@ export default {
   },
   data() {
     return {
-      atelierData: "",
       ateliers: [
         {
           id: 1,
           nom: 'Bella Italia',
-          photo: 'Atelier.webp',
+          photo: 'bella_italia.jpeg',
           cuisine: 'italienne',
           capacite: 15,
           creneau: 'mardi 5 mars midi'
@@ -57,31 +50,31 @@ export default {
         {
           id: 2,
           nom: 'La Dolce Vita',
-          photo: 'Atelier.webp',
+          photo: 'dolce_vita.webp',
           cuisine: 'italienne',
           capacite: 12,
           creneau: 'mercredi 6 mars midi'
         },
         {
           id: 3,
-          nom: 'Primi e Secondi',
-          photo: 'Atelier.webp',
+          nom: 'prime_secondi',
+          photo: 'prime_secondi.jpeg',
           cuisine: 'italienne',
           capacite: 10,
           creneau: 'jeudi 7 mars midi'
         },
         {
           id: 4,
-          nom: 'Gusto Italiano',
-          photo: 'Atelier.webp',
+          nom: 'gusto_italiano',
+          photo: 'gusto_italiano.jpeg',
           cuisine: 'italienne',
           capacite: 20,
           creneau: 'vendredi 8 mars midi'
         },
         {
           id: 5,
-          nom: 'Petit Bistro',
-          photo: 'Atelier.webp',
+          nom: 'petit_bistro',
+          photo: 'petit_bistro.jpeg',
           cuisine: 'française',
           capacite: 18,
           creneau: 'samedi 9 mars midi'
@@ -89,23 +82,23 @@ export default {
         {
           id: 6,
           nom: 'La Cuisine Parisienne',
-          photo: 'Atelier.webp',
+          photo: 'cuisine_parisienne.jpeg',
           cuisine: 'française',
           capacite: 15,
           creneau: 'dimanche 10 mars midi'
         },
         {
           id: 7,
-          nom: 'Atelier.webp',
-          photo: 'Atelier.webp',
+          nom: 'Steak&frites',
+          photo: 'steak_frites.jpeg',
           cuisine: 'française',
-          capacite: 22,
+          capacite: 20,
           creneau: 'lundi 11 mars midi'
         },
         {
           id: 8,
           nom: 'Boulangerie et Pâtisserie',
-          photo: 'Atelier.webp',
+          photo: 'patiseries.jpeg',
           cuisine: 'française',
           capacite: 25,
           creneau: 'mardi 12 mars midi'
@@ -113,7 +106,7 @@ export default {
         {
           id: 9,
           nom: 'Fiesta Mexicana',
-          photo: 'Atelier.webp',
+          photo: 'fiesta_mexicana.jpeg',
           cuisine: 'mexicaine',
           capacite: 20,
           creneau: 'mercredi 13 mars midi'
@@ -121,7 +114,7 @@ export default {
         {
           id: 10,
           nom: 'Sabores de México',
-          photo: 'Atelier.webp',
+          photo: 'sabores.jpeg',
           cuisine: 'mexicaine',
           capacite: 18,
           creneau: 'jeudi 14 mars midi'
@@ -129,7 +122,7 @@ export default {
         {
           id: 11,
           nom: 'Cocina Mexicana',
-          photo: 'Atelier.webp',
+          photo: 'cocina_mexicana.avif',
           cuisine: 'mexicaine',
           capacite: 15,
           creneau: 'vendredi 15 mars midi'
@@ -137,7 +130,7 @@ export default {
         {
           id: 12,
           nom: 'Cocina de México',
-          photo: 'Atelier.webp',
+          photo: 'cocina_mexico.jpeg',
           cuisine: 'mexicaine',
           capacite: 12,
           creneau: 'samedi 16 mars midi'
@@ -145,7 +138,7 @@ export default {
         {
           id: 13,
           nom: 'Sushi Time',
-          photo: 'Atelier.webp',
+          photo: 'sushi_time.jpeg',
           cuisine: 'japonaise',
           capacite: 15,
           creneau: 'dimanche 17 mars midi'
@@ -153,7 +146,7 @@ export default {
         {
           id: 14,
           nom: 'Sushi Lovers',
-          photo: 'Atelier.webp',
+          photo: 'sushi_lover.jpeg',
           cuisine: 'japonaise',
           capacite: 12,
           creneau: 'lundi 18 mars midi'
@@ -161,7 +154,7 @@ export default {
         {
           id: 15,
           nom: 'Sushi Mania',
-          photo: 'Atelier.webp',
+          photo: 'sushi_mania.jpeg',
           cuisine: 'japonaise',
           capacite: 18,
           creneau: 'mardi 19 mars midi'
@@ -169,7 +162,7 @@ export default {
         {
           id: 16,
           nom: 'Sushi Bar',
-          photo: 'Atelier.webp',
+          photo: 'sushi_bar.jpeg',
           cuisine: 'japonaise',
           capacite: 20,
           creneau: 'mercredi 20 mars midi'
@@ -177,7 +170,7 @@ export default {
         {
           id: 17,
           nom: 'Gyros et Souvlaki',
-          photo: 'Atelier.webp',
+          photo: 'souvlaki.jpeg',
           cuisine: 'grecque',
           capacite: 18,
           creneau: 'jeudi 21 mars midi'
@@ -185,7 +178,7 @@ export default {
         {
           id: 18,
           nom: 'Mediterranean Flavors',
-          photo: 'Atelier.webp',
+          photo: 'mediteran_grec.jpeg',
           cuisine: 'grecque',
           capacite: 20,
           creneau: 'vendredi 22 mars midi'
@@ -193,7 +186,7 @@ export default {
         {
           id: 19,
           nom: 'Greek Taverna',
-          photo: 'Atelier.webp',
+          photo: 'greektaverna.jpeg',
           cuisine: 'grecque',
           capacite: 16,
           creneau: 'samedi 23 mars midi'
@@ -201,7 +194,7 @@ export default {
         {
           id: 20,
           nom: 'Greek Delicacies',
-          photo: 'Atelier.webp',
+          photo: 'greek_delicacies.webp',
           cuisine: 'grecque',
           capacite: 14,
           creneau: 'dimanche 24 mars midi'
@@ -210,7 +203,7 @@ export default {
         {
           id: 21,
           nom: 'Saveurs d\'Orient',
-          photo: 'Atelier.webp',
+          photo: 'saveurs-orient.jpeg',
           cuisine: 'orientale',
           capacite: 20,
           creneau: 'lundi 25 mars midi'
@@ -226,7 +219,7 @@ export default {
         {
           id: 23,
           nom: 'Cuisine du Maghreb',
-          photo: 'Atelier.webp',
+          photo: 'cuisine_maghreb.webp',
           cuisine: 'orientale',
           capacite: 18,
           creneau: 'mercredi 27 mars midi'
@@ -234,7 +227,7 @@ export default {
         {
           id: 24,
           nom: 'Cuisine Libanaise',
-          photo: 'Atelier.webp',
+          photo: 'cuisine_libanaise.jpeg',
           cuisine: 'orientale',
           capacite: 12,
           creneau: 'jeudi 28 mars midi'
@@ -247,12 +240,12 @@ export default {
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.atelierData.length / this.pageSize);
+      return Math.ceil(this.ateliers.length / this.pageSize);
     },
     paginatedAteliers() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      return this.atelierData.slice(startIndex, endIndex);
+      return this.ateliers.slice(startIndex, endIndex);
     },
   },
   methods: {
@@ -269,25 +262,10 @@ export default {
         this.currentPage--;
       }
     },
-    fetchAtelierData() {
-      fetch(API_LIST_ATELIER)
-          .then(response => response.json())
-          .then(data => {
-            this.atelierData = data;
-          })
-          .catch((error) => {
-            console.log('erreur de chargement des données : ' + error);
-          })
-    },
   },
-  mounted() {
-    this.fetchAtelierData();
-  }
 };
 </script>
 <style scoped>
-/* Header */
-
 .container {
   width: 100%;
   margin: 0 auto;
@@ -301,30 +279,12 @@ export default {
   margin-right: 10px;
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.home-view{
-  animation: slideUp 1s cubic-bezier(0,0,0,1);
-  padding: 20px 0;
-  width: 100%;
-  margin-left: 35px;
-}
-
 .hero-section {
   background-color: #f9f9f9;
   padding: 60px 0;
   text-align: center;
   width: 100%;
-  margin-left: 35px;
+  margin-left: 130px;
 
 }
 
@@ -344,7 +304,7 @@ export default {
   background-color: #f9f9f9;
   padding: 40px 0;
   width: 100%;
-  margin-left: 35px;
+  margin-left: 130px;
 }
 
 .section-title {
@@ -356,7 +316,7 @@ export default {
 
 .ateliers {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   justify-items: center;
 }
@@ -376,19 +336,19 @@ export default {
 
 .atelier-card img {
   border-radius: 8px;
-  margin-bottom: 15px;
-  width: 100%;
+  margin-bottom: 10px;
+  width: 150px;
 }
 
 .atelier-card h3 {
   color: #333333;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
 }
 
 .atelier-card p {
   color: #666666;
-  font-size: 16px;
+  font-size: 1rem;
   margin-bottom: 5px;
 }
 
@@ -419,4 +379,3 @@ export default {
 }
 
 </style>
-
