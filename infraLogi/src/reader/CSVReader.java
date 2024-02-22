@@ -1,6 +1,7 @@
 package reader;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class CSVReader {
     public static List<String[]> readCSV(String csvContent) throws IOException {
         List<String[]> data = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new StringReader(csvContent))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvContent))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // Divisez la ligne en utilisant le point-virgule comme séparateur

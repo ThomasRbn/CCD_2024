@@ -9,10 +9,11 @@ import structureDonnees.Donnees;
 public class TestWithFile {
 
         public static void main(String[] args) {
-            Donnees donnees = CSVReaderFile.reader("infraLogi/src/reader/probleme8.csv ");
+            Donnees donnees = CSVReaderFile.reader("infraLogi/src/reader/probleme9.csv");
             Probleme probleme = new Probleme();
             ProblemeEtat etat = new ProblemeEtat(donnees);
             AStar aStar = new AStar(probleme, etat);
             aStar.solve();
+            System.out.println(aStar.getEnd_node().getDonnees());
         }
 }
