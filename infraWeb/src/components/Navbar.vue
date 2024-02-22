@@ -1,7 +1,6 @@
 <template>
   <nav class="nav-bar">
-    <RouterLink to='/' class="nav-link">Home</RouterLink>
-    <RouterLink to='/prout' class="nav-link">Prout</RouterLink>
+    <RouterLink to='/' class="nav-link"><b>Accueil</b></RouterLink>
     <RouterLink to='/about' class="nav-link">About</RouterLink>
     <RouterLink to='/voeux' class="nav-link">Mes voeux</RouterLink>
   </nav>
