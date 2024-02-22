@@ -1,7 +1,7 @@
     <project>
       <modelVersion>4.0.0</modelVersion>
      
-      <groupId>com.mycompany.app</groupId>
+      <groupId>CCD_2024</groupId>
       <artifactId>infraLogi</artifactId>
       <version>1</version>
     </project>
