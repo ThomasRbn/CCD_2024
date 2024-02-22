@@ -5,6 +5,7 @@ import Atelier from "@/views/Atelier.vue";
 import Voeux from "@/views/Voeux.vue"
 import AtelierModification from "@/views/AtelierModification.vue";
 import Connexion from "@/views/Connexion.vue";
+import APropos from "@/views/APropos.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/:pathMatch(.*)',
       name: 'page404',
       component: Page404
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: APropos
     }
   ]
 })

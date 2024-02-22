@@ -1,6 +1,22 @@
+<script>
+import { RouterLink } from 'vue-router'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    RouterLink
+  },
+  methods: {
+    goHome() {
+      this.$router.push('/')
+    }
+  }
+})
+
+</script>
 <template>
   <header class="header">
-    <div class="logo-container">
+    <div @click="goHome" class="logo-container rounded-2xl bg-white pl-1 pr-1 cursor-pointer transition duration-300 ease-in-out transform hover:drop-shadow-md">
       <img src="/img/icon.png" alt="logo" class="logo" />
       <h1 class="site-title">CookingBooking</h1>
     </div>
@@ -17,7 +33,6 @@
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   padding: 10px 20px;
   border-bottom: 2px solid #eeeeee;
 }

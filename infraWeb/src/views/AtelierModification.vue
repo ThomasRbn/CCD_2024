@@ -43,7 +43,7 @@ export default {
       <button @click="ajouterAtelier(items)" class="bg-green-boite text-white p-2 m-2 rounded-lg active:bg-purple-boite">Ajouter</button>
     </div>
     <div v-else>
-      <p>🔴 Vous n'avez pas les rôles nécessaires pour être administrateur :')</p>
+      <p>🔴 Vous n'avez pas les rôles nécessaires pour être administrateur</p>
     </div>
   </div>
 
