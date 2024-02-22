@@ -21,9 +21,22 @@ class Atelier
     #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'atelier')]
     private Collection $affectations;
 
+    #[ORM\Column]
+    private ?int $nbPlaces = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
     public function __construct()
     {
         $this->affectations = new ArrayCollection();
+    }
+
+    public function updateAtelier(string $nom, Theme $theme, int $nbPlaces): void
+    {
+        $this->nom = $nom;
+        $this->theme = $theme;
+        $this->nbPlaces = $nbPlaces;
     }
 
     public function getId(): ?int
@@ -71,5 +84,44 @@ class Atelier
         }
 
         return $this;
+    }
+
+    public function getNbPlaces(): ?int
+    {
+        return $this->nbPlaces;
+    }
+
+    public function setNbPlaces(int $nbPlaces): static
+    {
+        $this->nbPlaces = $nbPlaces;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        $affectations = [];
+        foreach($this->affectations as $affectation){
+            $affectations[] = $affectation->toArray();
+        }
+        return [
+            'id' => $this->id,
+            'theme' => $this->theme->toArray(),
+            'affectations' => $affectations,
+            'nbPlaces' => $this->nbPlaces,
+            'nom' => $this->nom,
+        ];
     }
 }
