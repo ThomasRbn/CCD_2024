@@ -285,13 +285,16 @@ export default {
 /* Header */
 .header {
   background-color: #333;
-  padding: 20px 0;
+  padding: 10px 0;
   width: 100%;
+  position: fixed;
 }
 
 .container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 .navigation {
@@ -302,6 +305,7 @@ export default {
 
 .logo {
   display: flex;
+  position: relative;
   align-items: center;
 }
 
@@ -314,7 +318,10 @@ export default {
 .site-title {
   color: #fff;
   font-size: 24px;
-  margin: 0;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: relative;
+  top: -2px;
 }
 
 .nav-links {
@@ -333,12 +340,13 @@ export default {
   color: #45a049;
 }
 
-/* Hero Section */
 .hero-section {
   background-color: #f9f9f9;
   padding: 60px 0;
   text-align: center;
   width: 100%;
+  margin-left: 130px;
+
 }
 
 .hero-title {
@@ -353,11 +361,11 @@ export default {
   margin-bottom: 40px;
 }
 
-/* Ateliers Section */
 .ateliers-section {
   background-color: #f9f9f9;
   padding: 40px 0;
   width: 100%;
+  margin-left: 130px;
 }
 
 .section-title {
@@ -390,7 +398,7 @@ export default {
 .atelier-card img {
   border-radius: 8px;
   margin-bottom: 15px;
-  width: 100%; /* Pour s'assurer que l'image s'adapte à la taille du conteneur */
+  width: 100%;
 }
 
 .atelier-card h3 {
