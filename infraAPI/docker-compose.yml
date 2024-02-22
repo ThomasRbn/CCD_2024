@@ -3,7 +3,6 @@ services:
   # Service MariaDB
   mariadb:
     image: mariadb:latest
-    platform: linux/arm64
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root

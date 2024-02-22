@@ -32,8 +32,8 @@ class Atelier
 
     public function updateAtelier(string $nom, string $code): void
     {
-        $this->setNom($nom);
-        $this->setCode($code);
+        $this->nom = $nom;
+        $this->code = $code;
     }
 
     public function getId(): ?int
@@ -46,23 +46,18 @@ class Atelier
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): static
+    public function toArray(): array
     {
-        $this->code = $code;
-
-        return $this;
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'code' => $this->code,
+        ];
     }
 
     /**
