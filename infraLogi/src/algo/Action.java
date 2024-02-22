@@ -8,4 +8,8 @@ public class Action {
         this.idCandidat = idCandidat;
         this.idAtelier = idAtelier;
     }
+
+    public String toString(){
+        return "Action: Candidat " + idCandidat + " -> Atelier " + idAtelier;
+    }
 }
