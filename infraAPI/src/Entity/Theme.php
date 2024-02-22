@@ -21,12 +21,12 @@ class Theme
     #[ORM\Column(length: 10)]
     private ?string $code = null;
 
-    #[ORM\OneToMany(targetEntity: Atelier::class, mappedBy: 'atelier')]
-    private Collection $cours;
+    #[ORM\OneToMany(targetEntity: Atelier::class, mappedBy: 'theme')]
+    private Collection $atelier;
 
     public function __construct()
     {
-        $this->cours = new ArrayCollection();
+        $this->atelier = new ArrayCollection();
     }
 
 
@@ -63,27 +63,27 @@ class Theme
     /**
      * @return Collection<int, Atelier>
      */
-    public function getCours(): Collection
+    public function getAtelier(): Collection
     {
-        return $this->cours;
+        return $this->atelier;
     }
 
-    public function addCours(Atelier $cour): static
+    public function addAtelier(Atelier $cour): static
     {
-        if (!$this->cours->contains($cour)) {
-            $this->cours->add($cour);
-            $cour->setAtelier($this);
+        if (!$this->atelier->contains($cour)) {
+            $this->atelier->add($cour);
+            $cour->setTheme($this);
         }
 
         return $this;
     }
 
-    public function removeCours(Atelier $cour): static
+    public function removeAtelier(Atelier $cour): static
     {
-        if ($this->cours->removeElement($cour)) {
+        if ($this->atelier->removeElement($cour)) {
             // set the owning side to null (unless already changed)
-            if ($cour->getAtelier() === $this) {
-                $cour->setAtelier(null);
+            if ($cour->getTheme() === $this) {
+                $cour->setTheme(null);
             }
         }
 

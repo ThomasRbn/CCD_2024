@@ -15,10 +15,10 @@ class Atelier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cours')]
-    private ?Theme $atelier = null;
+    #[ORM\ManyToOne(inversedBy: 'atelier')]
+    private ?Theme $theme = null;
 
-    #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'cours')]
+    #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'atelier')]
     private Collection $affectations;
 
     public function __construct()
@@ -31,14 +31,14 @@ class Atelier
         return $this->id;
     }
 
-    public function getAtelier(): ?Theme
+    public function getTheme(): ?Theme
     {
-        return $this->atelier;
+        return $this->theme;
     }
 
-    public function setAtelier(?Theme $atelier): static
+    public function setTheme(?Theme $theme): static
     {
-        $this->atelier = $atelier;
+        $this->theme = $theme;
 
         return $this;
     }
@@ -55,7 +55,7 @@ class Atelier
     {
         if (!$this->affectations->contains($affectation)) {
             $this->affectations->add($affectation);
-            $affectation->setCours($this);
+            $affectation->setAtelier($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Atelier
     {
         if ($this->affectations->removeElement($affectation)) {
             // set the owning side to null (unless already changed)
-            if ($affectation->getCours() === $this) {
-                $affectation->setCours(null);
+            if ($affectation->getAtelier() === $this) {
+                $affectation->setAtelier(null);
             }
         }
 
