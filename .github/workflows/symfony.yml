@@ -40,6 +40,8 @@ jobs:
             ${{ runner.os }}-php-
       - name: Debug Working Directory
         run: ls -la
+      - name: Update Dependencies
+        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
       - name: Wait for MariaDB to be ready
