@@ -5,8 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: ssh
-        env:
-          #SSH_PORT: ${{ secrets.SSH_PORT }}
+       
           
         uses: invi5H/ssh-action@v1
         with:
