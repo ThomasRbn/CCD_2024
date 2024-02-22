@@ -31,4 +31,4 @@ jobs:
     #- name: keyscan
       #run: sudo ssh-keyscan -p 22 -H "docketu.iutnc.univ-lorraine.fr" > ~/.ssh/known_hosts
     - name: connect ssh
-      run: sudo ssh ${{ secrets.UNIV_LOGIN }}@docketu.iutnc.univ-lorraine.fr -i ~/.ssh/id_rsa ls
+      run: sudo ssh ${{ secrets.UNIV_LOGIN }}@docketu.iutnc.univ-lorraine.fr ls
