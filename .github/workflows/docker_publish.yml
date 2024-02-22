@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "infraAPI" ]
+    branches: [ "infraLogi" ]
   pull_request:
     branches: [ "master" ]
 
