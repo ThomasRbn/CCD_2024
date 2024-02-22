@@ -8,6 +8,9 @@ export default {
       idPremierVoeu: "",
       idDeuxiemeVoeu: "",
       idTroisiemeVoeu: "",
+      idQuatriemeVoeu: "",
+      idCinquiemeVoeu: "",
+      idSixiemeVoeu: "",
       nom: "",
       prenom: "",
       email: "",
@@ -53,6 +56,24 @@ export default {
         <div>
           <p>Mon troisième choix :</p>
           <select v-model="this.idTroisiemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+          </select>
+        </div>
+        <div>
+          <p>Mon quatrième choix :</p>
+          <select v-model="this.idQuatriemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+          </select>
+        </div>
+        <div>
+          <p>Mon cinquième choix :</p>
+          <select v-model="this.idCinquiemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+          </select>
+        </div>
+        <div>
+          <p>Mon sixième choix :</p>
+          <select v-model="this.idSixiemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
           </select>
         </div>
