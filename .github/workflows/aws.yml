@@ -26,8 +26,8 @@ jobs:
       run: sudo chmod 777 ~/.ssh/id_rsa 
     - name: idrsa_end2
       run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
-    - name: create hosts
-      run: touch ~/.ssh/known_hosts
+    #- name: create hosts
+      #run: touch ~/.ssh/known_hosts
     #- name: keyscan
       #run: sudo ssh-keyscan -p 22 -H "docketu.iutnc.univ-lorraine.fr" > ~/.ssh/known_hosts
     - name: connect ssh
