@@ -39,20 +39,20 @@ export default {
         <div>
           <p>Mon premier choix :</p>
           <div class="w-full flex flex-wrap">
-            <select v-model="this.idPremierVoeu">
+            <select v-model="this.idPremierVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
               <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
             </select>
           </div>
         </div>
         <div>
           <p>Mon deuxième choix :</p>
-          <select v-model="this.idDeuxiemeVoeu">
+          <select v-model="this.idDeuxiemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
           </select>
         </div>
         <div>
           <p>Mon troisième choix :</p>
-          <select v-model="this.idTroisiemeVoeu">
+          <select v-model="this.idTroisiemeVoeu" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
           </select>
         </div>

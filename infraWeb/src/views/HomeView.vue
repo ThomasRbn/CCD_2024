@@ -4,7 +4,7 @@
     <section class="hero-section">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">Boîte à cuisine située à Nancy !</h1>
+          <h1 class="hero-title">Boîte à cuisine située à Nancy ! 🍽️</h1>
           <p class="hero-description">Découvrez nos prochains ateliers culinaires et réservez votre place dès maintenant.</p>
         </div>
       </div>
