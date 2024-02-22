@@ -26,14 +26,14 @@ class AppFixtures extends Fixture
 
         for($i = 0; $i < 5; $i++) {
             $theme = new Atelier();
-            $theme->updateAtelier('Atelier ' . $i, $themes[rand(0, 5)], 10);
+            $theme->updateAtelier('Atelier ' . $i, $themes[rand(0, 5)], 10, 'Description de l\'atelier ' . $i);
             $manager->persist($theme);
         }
 
         // créer 4 utilisateurs de test
         for ($i = 0; $i < 4; $i++) {
             $utilisateurs = new Utilisateur();
-            $utilisateurs->updateUtilisateur('utilisateur' . $i, 'utilisateur' . $i . '@gmail.com', 'utilisateur' . $i);
+            $utilisateurs->updateUtilisateur('utilisateur' . $i, 'utilisateur' . $i . '@gmail.com', 'utilisateur' . $i, []);
             $manager->persist($utilisateurs);
         }
 

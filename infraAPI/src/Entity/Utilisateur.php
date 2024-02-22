@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
@@ -17,10 +18,13 @@ class Utilisateur
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Prenom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $voeux = [];
 
     public function getId(): ?int
     {
@@ -41,12 +45,12 @@ class Utilisateur
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
@@ -63,11 +67,12 @@ class Utilisateur
         return $this;
     }
 
-    public function updateUtilisateur(string $nom, string $prenom, string $email): void
+    public function updateUtilisateur(string $nom, string $prenom, string $email, array $voeux): void
     {
         $this->nom = $nom;
-        $this->Prenom = $prenom;
+        $this->prenom = $prenom;
         $this->email = $email;
+        $this->voeux = $voeux;
     }
 
     public function toArray()
@@ -75,8 +80,20 @@ class Utilisateur
         return [
             'id' => $this->id,
             'nom' => $this->nom,
-            'prenom' => $this->Prenom,
+            'prenom' => $this->prenom,
             'email' => $this->email,
         ];
+    }
+
+    public function getVoeux(): array
+    {
+        return $this->voeux;
+    }
+
+    public function setVoeux(array $voeux): static
+    {
+        $this->voeux = $voeux;
+
+        return $this;
     }
 }
