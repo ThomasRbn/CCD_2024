@@ -22,6 +22,9 @@ jobs:
       run: sudo touch ~/.ssh/id_rsa    
          # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
           #chmod 600 ~/.ssh/id_rsa
+    - name: idrsa end
+      run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
+    
     - name: keyscan
       run: ssh-keyscan -H docketu.iutnc.univ-lorraine.fr >> ~/.ssh/known_hosts
     - name: connect ssh
