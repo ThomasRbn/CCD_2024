@@ -13,20 +13,20 @@ public class CSVWritter {
     public CSVWritter() throws IOException {
     }
 
-    public static String write(File file) {
-        Donnees donnees = CSVReader.reader(file.getPath());
+    public static String write(String csv) {
+        Donnees donnees = CSVReader.reader(csv);
         Probleme probleme = new Probleme();
         ProblemeEtat etat = new ProblemeEtat(donnees);
         BFS bfs = new BFS(probleme, etat);
         bfs.solve();
-        StringBuilder csv = new StringBuilder();
+        StringBuilder csvFinal = new StringBuilder();
         Donnees donneesfinal = bfs.getEnd_node().getDonnees();
         for (Candidats candidats : donneesfinal.getCandidats()) {
-            csv.append(candidats.getId()).append(";").append(candidats.getPrenom()).append(";");
+            csvFinal.append(candidats.getId()).append(";").append(candidats.getPrenom()).append(";");
             for (String atelier : candidats.getAteliersAffecte()) {
-                csv.append(atelier).append(";");
+                csvFinal.append(atelier).append(";");
             }
-            csv.append("\n");
+            csvFinal.append("\n");
         }
         return csv.toString();
     }
