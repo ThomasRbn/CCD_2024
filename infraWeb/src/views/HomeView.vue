@@ -1,19 +1,5 @@
 <template>
   <div class="home-view">
-    <!-- Header -->
-    <header class="header">
-      <div class="container">
-        <nav class="navigation">
-          <div class="logo">
-            <h1 class="site-title">CookingBooking</h1>
-          </div>
-          <div class="nav-links">
-            <router-link to="/" class="nav-link">Se connecter</router-link>
-            <router-link to="/ateliers" class="nav-link">Pas encore inscrit ?</router-link>
-          </div>
-        </nav>
-      </div>
-    </header>
 
     <section class="hero-section">
       <div class="container">
@@ -282,12 +268,6 @@ export default {
 </script>
 <style scoped>
 /* Header */
-.header {
-  background-color: #333;
-  padding: 10px 0;
-  width: 100%;
-  position: fixed;
-}
 
 .container {
   width: 100%;
@@ -296,55 +276,19 @@ export default {
   padding: 0 20px;
 }
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  position: relative;
-  align-items: center;
-}
-
 .logo img {
   height: 50px;
   width: auto;
   margin-right: 10px;
 }
 
-.site-title {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  position: relative;
-  top: -2px;
-}
-
-.nav-links {
-  display: flex;
-}
-
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #45a049;
-}
 
 .hero-section {
   background-color: #f9f9f9;
   padding: 60px 0;
   text-align: center;
   width: 100%;
-  margin-left: 130px;
+  margin-left: 50px;
 
 }
 
@@ -364,7 +308,7 @@ export default {
   background-color: #f9f9f9;
   padding: 40px 0;
   width: 100%;
-  margin-left: 130px;
+  margin-left: 50px;
 }
 
 .section-title {
