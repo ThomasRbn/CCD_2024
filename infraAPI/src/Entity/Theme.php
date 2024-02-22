@@ -30,7 +30,7 @@ class Theme
     }
 
 
-    public function updateAtelier(string $nom, string $code): void
+    public function updateTheme(string $nom, string $code): void
     {
         $this->nom = $nom;
         $this->code = $code;
