@@ -1,8 +1,8 @@
 package reader;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,13 +12,13 @@ import structureDonnees.Candidats;
 
 public class CSVReader {
 
-    public static Donnees reader(String csvFile) {
+    public static Donnees reader(String csvContent) {
 
         // Création de l'instance Donnees
         Donnees donnees = new Donnees();
 
         try {
-            List<String[]> data = readCSV(csvFile);
+            List<String[]> data = readCSV(csvContent);
 
             // Indicateurs pour savoir si nous traitons les ateliers ou les candidats
             boolean ateliersSection = false;
@@ -53,7 +53,7 @@ public class CSVReader {
                         donnees.ajouterAtelier(ateliers);
                     }
                     if (candidatsSection){
-                        ArrayList<String> candidatures = new ArrayList<String>(Arrays.asList(row).subList(3, row.length));
+                        ArrayList<String> candidatures = new ArrayList<>(Arrays.asList(row).subList(3, row.length));
                         //System.out.println(row[0] + " " + row[1] + " " + row[2] + " " + candidatures.toString());
                         Candidats candidats = new Candidats(Integer.parseInt(row[0]), row[1], Integer.parseInt(row[2]), candidatures);
                         donnees.ajouterCandidat(candidats);
@@ -67,10 +67,10 @@ public class CSVReader {
         return donnees;
     }
 
-    public static List<String[]> readCSV(String csvFile) throws IOException {
+    public static List<String[]> readCSV(String csvContent) throws IOException {
         List<String[]> data = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new StringReader(csvContent))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // Divisez la ligne en utilisant le point-virgule comme séparateur
