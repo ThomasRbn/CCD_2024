@@ -19,6 +19,12 @@ class AtelierController extends AbstractController
             $data[] = $atelier->toArray();
         }
 
-        return new JsonResponse($data, Response::HTTP_OK);
+        // Ajouter les en-têtes CORS
+        $response = new JsonResponse($data, Response::HTTP_OK);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+
+        return $response;
     }
 }
