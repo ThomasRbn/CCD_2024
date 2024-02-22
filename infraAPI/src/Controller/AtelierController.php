@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\AtelierRepository;
+use App\Repository\ThemeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AtelierController extends AbstractController
 {
-    #[Route('api/atelier', name: 'atelier.get', methods: ['GET'])]
-    public function index(AtelierRepository $atelierRepository): JsonResponse
+    #[Route('api/theme', name: 'theme.get', methods: ['GET'])]
+    public function index(ThemeRepository $atelierRepository): JsonResponse
     {
         $ateliers = $atelierRepository->findAll();
         $data = [];
