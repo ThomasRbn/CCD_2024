@@ -31,6 +31,15 @@ jobs:
       #run: ls -l
       run: mvn -B package --file ./pom.xml
       working-directory: infraLogi/src/tst
+    - name: Trigger Merge Workflow
+      run: git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@gmail.com"
+        
+        git checkout master
+        git merge --no-ff "${{ github.ref }}"
+        
+        git push origin master
+        
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
   #  - name: Update dependency graph
