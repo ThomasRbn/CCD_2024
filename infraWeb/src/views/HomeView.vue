@@ -5,7 +5,6 @@
       <div class="container">
         <nav class="navigation">
           <div class="logo">
-            <img src="/img/logo.png" alt="Logo">
             <h1 class="site-title">CookingBooking</h1>
           </div>
           <div class="nav-links">
