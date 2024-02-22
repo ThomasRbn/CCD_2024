@@ -5,9 +5,7 @@ import reader.CSVReader;
 import structureDonnees.Candidats;
 import structureDonnees.Donnees;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class CSVWritter {
@@ -25,7 +23,7 @@ public class CSVWritter {
         Donnees donneesfinal = bfs.getEnd_node().getDonnees();
         for (Candidats candidats : donneesfinal.getCandidats()) {
             csv.append(candidats.getId()).append(";").append(candidats.getPrenom()).append(";");
-            for (String atelier : candidats.getAteliers()) {
+            for (String atelier : candidats.getAteliersAffecte()) {
                 csv.append(atelier).append(";");
             }
             csv.append("\n");

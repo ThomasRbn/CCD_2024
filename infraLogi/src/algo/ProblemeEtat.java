@@ -37,4 +37,8 @@ public class ProblemeEtat {
     public Donnees getDonnees() {
         return donnees;
     }
+
+    public int getHeuristique(){
+        return donnees.calculerHeuristique();
+    }
 }

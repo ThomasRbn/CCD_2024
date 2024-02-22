@@ -27,7 +27,9 @@ public class Donnees {
     public int calculerScore() {
         int score = 0;
         for (Candidats candidat : candidats) {
-            score += candidat.getPoints();
+            int pointCandidat = candidat.getPoints();
+            //Application du malus "tout le monde est servi"
+            score += pointCandidat ==0 ? -100 : pointCandidat ;
         }
         return score;
     }
@@ -144,4 +146,14 @@ public class Donnees {
         return str;
     }
 
+    public int calculerHeuristique() {
+        int scoreRestant = 0;
+        for (Candidats candidat : candidats) {
+            scoreRestant += candidat.getPointRestantMax();
+        }
+
+        return scoreRestant;
+
+
+    }
 }

@@ -1,3 +1,4 @@
+import algo.AStar;
 import algo.BFS;
 import algo.Probleme;
 import algo.ProblemeEtat;
@@ -6,10 +7,10 @@ import structureDonnees.Donnees;
 
 public class test {
     public static void main(String[] args) {
-        Donnees donnees = CSVReader.reader("infraLogi/src/reader/probleme1.csv");
+        Donnees donnees = CSVReader.reader("infraLogi/src/reader/probleme4.csv");
         Probleme probleme = new Probleme();
         ProblemeEtat etat = new ProblemeEtat(donnees);
-        BFS bfs = new BFS(probleme, etat);
+        AStar bfs = new AStar(probleme, etat);
         bfs.solve();
         System.out.println(bfs.getEnd_node());
     }
