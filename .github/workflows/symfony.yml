@@ -3,8 +3,8 @@ name: Symfony
 on:
   push:
     branches: [ "InfraAPI" ]
-  pull_request:
-    branches: [ "master" ]
+  #pull_request:
+   # branches: [ "master" ]
 
 permissions:
   contents: read
