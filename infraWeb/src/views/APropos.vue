@@ -6,7 +6,7 @@
   <div class="w-5/6 p-8 h-screen">
     <h1 class="font-bold">A propos</h1>
     <div>
-      <p>Application réalisée dans le cadre du CrazyCharlyDay 2023, par le groupe Charly'GOATs 🐐</p>
+      <p>Application réalisée dans le cadre du CrazyCharlyDay 2024, par le groupe Charly'GOATs 🐐</p>
       <ul class="m-4">
         <li class="list-disc ml-4">Thomas Robineau</li>
         <li class="list-disc ml-4">Hugolin Rouyer</li>
