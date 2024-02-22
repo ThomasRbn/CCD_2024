@@ -33,7 +33,8 @@ jobs:
                 working-directory: infraAPI
                 run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             -   name: Start containers
-                run: docker-compose -f infraAPI/docker-compose.yml up -d
+                working-directory: infraAPI
+                run: docker-compose -f docker-compose.yml up -d
             -   name: Create Database
                 working-directory: infraAPI
                 run: |
