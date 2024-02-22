@@ -29,6 +29,14 @@ class AppFixtures extends Fixture
             $manager->persist($theme);
         }
 
+        // créer 4 utilisateurs de test
+        for ($i = 0; $i < 4; $i++) {
+            $utilisateur = new Utilisateur();
+            $utilisateur->updateUtilisateur('utilisateur' . $i, 'utilisateur' . $i . '@gmail.com', 'utilisateur' . $i);
+            $manager->persist($utilisateur);
+        }
+
+
         $manager->flush();
     }
 }
