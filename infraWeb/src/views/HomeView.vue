@@ -15,11 +15,14 @@
       <div class="container">
         <h2 class="section-title">Liste des ateliers</h2>
         <div class="ateliers">
+
           <!-- Boucle pour afficher chaque atelier -->
           <div v-for="atelier in paginatedAteliers" :key="atelier.id" class="atelier-card" @click="showDetails(atelier)">
-            <img :src="`/img/${atelier.photo}`" :alt="atelier.nom" class="atelier-image">
-            <h3>{{ atelier.nom }}</h3>
+            <p class="font-bold text-xl">{{ atelier.nom }}</p>
+            <p class="italic">{{ atelier.theme.nom }}</p>
+            <p>Places restantes : {{ atelier.nbPlaces }}</p>
           </div>
+
         </div>
         <div class="pagination">
           <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn">Précédent</button>
@@ -32,6 +35,7 @@
 
 <script>
 import Atelier from '@/components/Atelier.vue';
+import {API_LIST_ATELIER} from "@/url.js";
 
 export default {
   components: {
@@ -39,6 +43,7 @@ export default {
   },
   data() {
     return {
+      atelierData: "",
       ateliers: [
         {
           id: 1,
@@ -241,12 +246,12 @@ export default {
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.ateliers.length / this.pageSize);
+      return Math.ceil(this.atelierData.length / this.pageSize);
     },
     paginatedAteliers() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      return this.ateliers.slice(startIndex, endIndex);
+      return this.atelierData.slice(startIndex, endIndex);
     },
   },
   methods: {
@@ -263,7 +268,20 @@ export default {
         this.currentPage--;
       }
     },
+    fetchAtelierData() {
+      fetch(API_LIST_ATELIER)
+          .then(response => response.json())
+          .then(data => {
+            this.atelierData = data;
+          })
+          .catch((error) => {
+            console.log('erreur de chargement des données : ' + error);
+          })
+    },
   },
+  mounted() {
+    this.fetchAtelierData();
+  }
 };
 </script>
 <style scoped>
