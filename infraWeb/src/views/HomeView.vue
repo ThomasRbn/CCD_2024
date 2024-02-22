@@ -30,7 +30,11 @@
       <div class="container">
         <h2 class="section-title">Liste des ateliers</h2>
         <div class="ateliers">
-          <Atelier v-for="atelier in paginatedAteliers" :key="atelier.id" :atelier="atelier" />
+          <!-- Boucle pour afficher chaque atelier -->
+          <div v-for="atelier in paginatedAteliers" :key="atelier.id" class="atelier-card" @click="showDetails(atelier)">
+            <img :src="`/img/${atelier.photo}`" :alt="atelier.nom" class="atelier-image">
+            <h3>{{ atelier.nom }}</h3>
+          </div>
         </div>
         <div class="pagination">
           <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn">Précédent</button>
@@ -277,8 +281,8 @@ export default {
   },
 };
 </script>
-
 <style scoped>
+/* Header */
 .header {
   background-color: #333;
   padding: 20px 0;
@@ -329,6 +333,7 @@ export default {
   color: #45a049;
 }
 
+/* Hero Section */
 .hero-section {
   background-color: #f9f9f9;
   padding: 60px 0;
@@ -348,6 +353,7 @@ export default {
   margin-bottom: 40px;
 }
 
+/* Ateliers Section */
 .ateliers-section {
   background-color: #f9f9f9;
   padding: 40px 0;
@@ -368,9 +374,23 @@ export default {
   justify-items: center;
 }
 
+.atelier-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.atelier-card:hover {
+  transform: translateY(-5px);
+}
+
 .atelier-card img {
   border-radius: 8px;
   margin-bottom: 15px;
+  width: 100%; /* Pour s'assurer que l'image s'adapte à la taille du conteneur */
 }
 
 .atelier-card h3 {
@@ -410,4 +430,6 @@ export default {
 .pagination-btn:hover {
   background-color: #45a049;
 }
+
 </style>
+
