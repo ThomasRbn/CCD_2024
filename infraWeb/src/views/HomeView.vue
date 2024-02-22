@@ -288,7 +288,7 @@ export default {
   padding: 60px 0;
   text-align: center;
   width: 100%;
-  margin-left: 50px;
+  margin-left: 35px;
 
 }
 
@@ -308,7 +308,7 @@ export default {
   background-color: #f9f9f9;
   padding: 40px 0;
   width: 100%;
-  margin-left: 50px;
+  margin-left: 35px;
 }
 
 .section-title {
