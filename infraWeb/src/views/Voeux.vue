@@ -1,5 +1,5 @@
 <script>
-import { API_LIST_ATELIER } from "@/url.js";
+import { API_LIST_THEME } from "@/url.js";
 
 export default {
   data() {
@@ -17,8 +17,8 @@ export default {
     }
   },
   methods: {
-    fetchAtelierData() {
-      fetch(API_LIST_ATELIER)
+    fetchThemeData() {
+      fetch(API_LIST_THEME)
           .then(response => response.json())
           .then(data => {
             this.themeData = data;
@@ -29,7 +29,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchAtelierData();
+    this.fetchThemeData();
   }
 }
 </script>
