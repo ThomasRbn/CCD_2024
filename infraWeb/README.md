@@ -1,28 +1,21 @@
-# ccd
+# CrazyCharlyDay : Application Web CookingBooking 🍽️
 
-This template should help get you started developing with Vue 3 in Vite.
+Application réalisée dans le cadre du CrazyCharlyDay 2023, par le groupe Charly'GOATs 🐐 (Thomas Robineau, Hugolin Rouyer, Nicolas Russo, Emilien Hergott, Didier Ménène Ako Obono, Julien Bernard, Théo Pelizzarri, Antoine Riondé).
+En espérant que vous apprécierez notre travail ! 😊
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Prérequis
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilation/Hot-Reload pour le développement
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compilation pour la production
 
 ```sh
 npm run build
