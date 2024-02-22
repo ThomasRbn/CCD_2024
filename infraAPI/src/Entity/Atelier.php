@@ -27,16 +27,20 @@ class Atelier
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->affectations = new ArrayCollection();
     }
 
-    public function updateAtelier(string $nom, Theme $theme, int $nbPlaces): void
+    public function updateAtelier(string $nom, Theme $theme, int $nbPlaces, string $description): void
     {
         $this->nom = $nom;
         $this->theme = $theme;
         $this->nbPlaces = $nbPlaces;
+        $this->description = $description;
     }
 
     public function getId(): ?int
@@ -47,6 +51,18 @@ class Atelier
     public function getTheme(): ?Theme
     {
         return $this->theme;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     public function setTheme(?Theme $theme): static

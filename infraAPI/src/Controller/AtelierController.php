@@ -39,7 +39,7 @@ class AtelierController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $atelier = new Atelier();
         $theme = $themeRepository->findOneBy(['code' => $data['theme']]);
-        $atelier->updateAtelier($data['nom'], $theme, $data['nbPlaces']);
+        $atelier->updateAtelier($data['nom'], $theme, $data['nbPlaces'], $data['description']);
         $entityManager->persist($atelier);
         $entityManager->flush();
 
