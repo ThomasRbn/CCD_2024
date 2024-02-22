@@ -14,43 +14,19 @@ export default {
     }
   },
   methods: {
-    setPremierVoeu(id) {
-      this.resetButtonColor();
-      this.idPremierVoeu = id;
-      this.updateButtonColor(id);
-    },
-    setDeuxiemeVoeu(id) {
-      this.resetButtonColor();
-      this.idDeuxiemeVoeu = id;
-      this.updateButtonColor(id);
-    },
-    setTroisiemeVoeu(id) {
-      this.resetButtonColor();
-      this.idTroisiemeVoeu = id;
-      this.updateButtonColor(id);
-    },
     fetchAtelierData() {
       fetch(API_LIST_ATELIER)
           .then(response => response.json())
           .then(data => {
-            // Ajoute la propriété 'selected' à chaque élément de données
-            this.themeData = data.map(theme => ({ ...theme, selected: false }));
+            this.themeData = data;
           })
           .catch((error) => {
             console.log('erreur de chargement des données : ' + error);
           })
     },
-    resetButtonColor() {
-      this.themeData.forEach(theme => {
-        theme.selected = false;
-      });
-    },
-    updateButtonColor(id) {
-      const selectedTheme = this.themeData.find(theme => theme.code === id);
-      if (selectedTheme) {
-        selectedTheme.selected = true;
-      }
-    }
+  },
+  mounted() {
+    this.fetchAtelierData();
   }
 }
 </script>
@@ -58,32 +34,27 @@ export default {
 <template>
   <div class="flex flex-row w-5/6 p-8">
     <div class="w-1/2 p-6 border-r-2">
-      <button @click="fetchAtelierData">Charger les données</button>
       <div class="">
         <p class="font-bold text-2xl mb-4">Choix des voeux</p>
         <div>
-          <p>Mon premier choix : {{ this.idPremierVoeu }}</p>
+          <p>Mon premier choix :</p>
           <div class="w-full flex flex-wrap">
-            <button @click="setPremierVoeu(theme.code)" v-for="theme in themeData"
-                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
-            </button>
+            <select v-model="this.idPremierVoeu">
+              <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+            </select>
           </div>
         </div>
         <div>
-          <p>Mon deuxième choix : </p>
-          <div class="w-full flex flex-wrap">
-            <button @click="setDeuxiemeVoeu(theme.code)" v-for="theme in themeData"
-                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
-            </button>
-          </div>
+          <p>Mon deuxième choix :</p>
+          <select v-model="this.idDeuxiemeVoeu">
+            <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+          </select>
         </div>
         <div>
           <p>Mon troisième choix :</p>
-          <div class="w-full flex flex-wrap">
-            <button @click="setTroisiemeVoeu(theme.code)" v-for="theme in themeData"
-                    :class="{ 'p-4 bg-green-100': !theme.selected, 'p-4 bg-blue-100': theme.selected }">{{ theme.nom }}
-            </button>
-          </div>
+          <select v-model="this.idTroisiemeVoeu">
+            <option v-for="theme in themeData" :value="theme.code">{{ theme.nom }}</option>
+          </select>
         </div>
       </div>
     </div>
