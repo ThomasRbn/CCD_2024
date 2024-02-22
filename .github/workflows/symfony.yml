@@ -38,12 +38,14 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
+      - name: Go to infraAPI directory
+        run: cd infraAPI
       - name: Debug Working Directory
         run: ls -la
       - name: Update Dependencies
-        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
+        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --working-dir=infraAPI
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Wait for MariaDB to be ready
         run: dockerize -wait tcp://mariadb:3306 -timeout 60s
       - name: Create Database
