@@ -28,6 +28,6 @@
 }
 
 .nav-link:hover {
-  background-color: #6AB04A;
+  background-color: rgba(255, 255, 255, 0.65);
 }
 </style>
