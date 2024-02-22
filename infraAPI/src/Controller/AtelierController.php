@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Atelier;
 use App\Repository\AtelierRepository;
+use App\Repository\ThemeRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 class AtelierController extends AbstractController
 {
-    #[Route('api/atelier', name: 'atelier.get')]
+    #[Route('api/atelier', name: 'atelier.get', methods: ['GET'])]
     public function index(AtelierRepository $atelierRepository): JsonResponse
     {
         $ateliers = $atelierRepository->findAll();
@@ -26,5 +31,18 @@ class AtelierController extends AbstractController
 
         return $response;
 
+    }
+
+    #[Route('api/atelier', name: 'atelier.post', methods: ['POST'])]
+    public function post(Request $request, EntityManagerInterface $entityManager, ThemeRepository $themeRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $atelier = new Atelier();
+        $theme = $themeRepository->findOneBy(['code' => $data['theme']]);
+        $atelier->updateAtelier($data['nom'], $theme, $data['nbPlaces']);
+        $entityManager->persist($atelier);
+        $entityManager->flush();
+
+        return new JsonResponse($atelier->toArray(), 201);
     }
 }
