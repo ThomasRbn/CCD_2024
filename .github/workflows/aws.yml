@@ -56,7 +56,7 @@ jobs:
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
     - name: Connect to Docketu
       run:    mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H hostname >> ~/.ssh/known_hosts
     - name: connect ssh
