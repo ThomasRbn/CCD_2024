@@ -43,7 +43,7 @@ public class CustomHandler implements HttpHandler {
         // Vous pouvez par exemple effectuer une requête HTTP vers une autre API
         // Utilisez la classe HttpURLConnection pour cela
 
-        String apiUrl = "https://docketu.iutnc.univ-lorraine.fr:8000/api/java/retour";
+        String apiUrl = "https://localhost:8000/api/java/retour";
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
