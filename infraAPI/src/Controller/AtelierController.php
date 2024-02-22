@@ -43,6 +43,12 @@ class AtelierController extends AbstractController
         $entityManager->persist($atelier);
         $entityManager->flush();
 
-        return new JsonResponse($atelier->toArray(), 201);
+        // Ajouter les en-têtes CORS
+        $response = new JsonResponse($atelier->toArray(), 200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+
+        return $response;
     }
 }
