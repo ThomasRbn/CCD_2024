@@ -9,5 +9,8 @@ import  { RouterLink } from 'vue-router'
     <RouterLink to='/prout' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded drop-shadow-md m-1">
       Prout
     </RouterLink>
+    <RouterLink to='/voeux' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded drop-shadow-md m-1">
+      Mes voeux
+    </RouterLink>
   </nav>
 </template>

@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import Prout from '@/views/Prout.vue'
 import Page404 from '@/views/Page404.vue'
 import Atelier from "@/views/Atelier.vue";
+import Voeux from "@/views/Voeux.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/atelier/:id',
       name: 'atelier',
       component: Atelier
+    },
+    {
+      path: '/voeux',
+      name: 'voeux',
+      component: Voeux
     },
     {
       path: '/:pathMatch(.*)',
