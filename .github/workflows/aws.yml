@@ -16,8 +16,8 @@ jobs:
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
     - name: create .ssh
       run: mkdir  ~/.ssh
-    - name: test
-      run: ls -l ~/.*
+    #- name: test
+      #run: ls -l ~/.*
     - name: idrsa
       run: sudo touch ~/.ssh/id_rsa    
          # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
