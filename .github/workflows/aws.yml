@@ -14,24 +14,24 @@ jobs:
     steps:
    # - name: install sshpass
     #  run: sudo apt-get update && sudo apt-get install -y sshpass
-    - name: create .ssh
-      run: mkdir  ~/.ssh
+   # - name: create .ssh
+    #  run: mkdir  ~/.ssh
     #- name: test
       #run: ls -l ~/.*
-    - name: idrsa
-      run: sudo touch ~/.ssh/id_rsa    
+    #- name: idrsa
+     # run: sudo touch ~/.ssh/id_rsa    
          # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
           #chmod 600 ~/.ssh/id_rsa
-    - name: idrsa end
-      run: sudo chmod 777 ~/.ssh/id_rsa 
-    - name: idrsa_end2
-      run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
-    - name: create hosts
-      run: touch ~/.ssh/known_hosts
-    - name: keyscan
-      run: sudo ssh-keyscan -H 209.38.178.131 >> ~/.ssh/known_hosts
-    - name: permissions  dpssier
-      run: sudo chmod 700 ~/.ssh
+    #- name: idrsa end
+     # run: sudo chmod 777 ~/.ssh/id_rsa 
+    #- name: idrsa_end2
+     # run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
+    #- name: create hosts
+     # run: touch ~/.ssh/known_hosts
+    #- name: keyscan
+     # run: sudo ssh-keyscan -H 209.38.178.131 >> ~/.ssh/known_hosts
+    #- name: permissions  dpssier
+     # run: sudo chmod 700 ~/.ssh
     #- name: connect ssh
      # run: sudo ssh -i ${{ secrets.UNIV_RSA }} root@209.38.178.131 ls
       #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
@@ -46,21 +46,30 @@ jobs:
     # DigitalOcean Personal Access Token.(use https://docs.digitalocean.com/reference/api/create-personal-access-token/ for creating new token)
          token: ${{ secrets.DO_TOKEN }}
     # (OPTIONAL)a json array of objects with the properties name (description), repository (repo url), tag (image tag)
-         images: '[
-                   { 
-                     "name": "api",
-                     "image":{
-                      "registry_type": "DOCKER_HUB",
-                      "repository": "thomasrbn/ccd_infra_api",
-                      "tag": "latest"
-                    },
-                   },
-                   {
-                     "name": "logi",
-                     "image":{
-                      "registry_type": "DOCKER_HUB",
-                      "registry": "DOCKER_HUB",
-                      "repository": "thomasrbn/ccd_infra_logi",
-                      "tag": "latest"
-                    },
-                  }]'
+         images: '[{
+                    "name": "api", #component name
+                    "image":{ 
+                    "registry_type": "DOCKER_HUB", #Registry type, DOCR and DOCKER_HUB are supported
+                    "registry": "thomasrbn", # DockerHub only, the registry name
+                    "repository": "ccd_infra_api", # repository name
+                    "tag": "latest" # tag name
+  },
+}]
+                 '
+                   #{ 
+                    # "name": "api",
+                     #"image":{
+                   #   "registry_type": "DOCKER_HUB",
+                    #  "repository": "thomasrbn/ccd_infra_api",
+                     # "tag": "latest"
+                    #},
+                   #},
+                   #{
+                    # "name": "logi",
+                     #"image":{
+                      #"registry_type": "DOCKER_HUB",
+                     # "registry": "DOCKER_HUB",
+                      #"repository": "thomasrbn/ccd_infra_logi",
+                      #"tag": "latest"
+                    #},
+                  #}]'
