@@ -9,4 +9,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+atelier.env
+
 docker

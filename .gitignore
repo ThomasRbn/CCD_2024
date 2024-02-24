@@ -2,3 +2,4 @@
 infraLogi/out
 infraAPI/vendor
 infraAPI/var
+*.class
