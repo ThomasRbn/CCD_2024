@@ -39,6 +39,12 @@ jobs:
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Create id_rsa file
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
       - name: Deploy Docker container
         run: |
-          ssh ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} 'docker pull thomasrbn/ccd_infra_api'
+          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} 'docker pull thomasrbn/ccd_infra_api'
