@@ -70,7 +70,7 @@ jobs:
                      #"image":{
                       #"registry_type": "DOCKER_HUB",
                      # "registry": "DOCKER_HUB",
-                      #"repository": "thomasrbn/ccd_infra_logi",
+                      #"repository": "https://hub.docker.com/r/thomasrbn/ccd_infra_api/tags",
                       #"tag": "latest"
                     #},
                   #}]'
