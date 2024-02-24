@@ -41,4 +41,4 @@ jobs:
 
       - name: Deploy Docker container
         run: |
-          ssh $DROPLET_USERNAME@$DROPLET_IP -p $DROPLET_SSH_PORT 'docker pull thomasrbn/ccd_infra_api'
+          ssh ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} 'docker pull thomasrbn/ccd_infra_api'
