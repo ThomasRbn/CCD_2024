@@ -20,5 +20,5 @@ jobs:
     # Version of doctl to install
        version: latest
     # DigitalOcean API Token
-       token: ${{ secrets.DO_TOKEN }
+       token: ${{ secrets.DO_TOKEN }}
           
