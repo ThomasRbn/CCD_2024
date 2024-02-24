@@ -44,6 +44,7 @@ jobs:
     # Name of the app. (The name of the app must be unique across all apps in the same account.)
          app_name:  test451
     # DigitalOcean Personal Access Token.(use https://docs.digitalocean.com/reference/api/create-personal-access-token/ for creating new token)
+         token: '1234sd'
        #  token: ${{ secrets.DO_TOKEN }}
     # (OPTIONAL)a json array of objects with the properties name (description), repository (repo url), tag (image tag)
          images: '[{
