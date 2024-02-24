@@ -51,7 +51,7 @@ jobs:
                     "image":{ 
                     "registry_type": "DOCKER_HUB", #Registry type, DOCR and DOCKER_HUB are supported
                     "registry": "thomasrbn", # DockerHub only, the registry name
-                    "repository": "thomasrbn/ccd_infra_web", # repository name
+                    "repository": "ccd_infra_web", # repository name
                     "tag": "latest" # tag name
                 
   },
