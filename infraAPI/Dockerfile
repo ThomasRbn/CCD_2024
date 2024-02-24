@@ -19,7 +19,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /app
 
 # Copie de votre projet Symfony dans le conteneur
-COPY infraAPI /app
+COPY . /app
 
 # Installation des dépendances du projet
 RUN composer install
