@@ -31,7 +31,8 @@ jobs:
     - name: keyscan
       run: sudo ssh-keyscan -p 22 -H "209.38.178.131" > ~/.ssh/known_hosts
     - name: connect ssh
-      run: sudo ssh -l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
+      run: sudo ssh root@209.38.178.131 
+      #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
     
      #- name: DigitalOcean App Platform deployment
   # You may pin to the exact commit or the version.
