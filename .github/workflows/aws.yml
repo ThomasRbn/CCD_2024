@@ -30,6 +30,8 @@ jobs:
       run: touch ~/.ssh/known_hosts
     - name: keyscan
       run: sudo ssh-keyscan -H 209.38.178.131 >> ~/.ssh/known_hosts
+    - name: permissions  dpssier
+      run: sudo chmod 700 ~/.ssh
     - name: connect ssh
       run: sudo ssh -i ~/.ssh/id_rsa root@209.38.178.131 ls
       #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
