@@ -12,64 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-   # - name: install sshpass
-    #  run: sudo apt-get update && sudo apt-get install -y sshpass
-   # - name: create .ssh
-    #  run: mkdir  ~/.ssh
-    #- name: test
-      #run: ls -l ~/.*
-    #- name: idrsa
-     # run: sudo touch ~/.ssh/id_rsa    
-         # echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
-          #chmod 600 ~/.ssh/id_rsa
-    #- name: idrsa end
-     # run: sudo chmod 777 ~/.ssh/id_rsa 
-    #- name: idrsa_end2
-     # run: echo "${{ secrets.UNIV_RSA }}" > ~/.ssh/id_rsa
-    #- name: create hosts
-     # run: touch ~/.ssh/known_hosts
-    #- name: keyscan
-     # run: sudo ssh-keyscan -H 209.38.178.131 >> ~/.ssh/known_hosts
-    #- name: permissions  dpssier
-     # run: sudo chmod 700 ~/.ssh
-    #- name: connect ssh
-     # run: sudo ssh -i ${{ secrets.UNIV_RSA }} root@209.38.178.131 ls
-      #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
-    
-    - name: DigitalOcean App Platform deployment
+    - name: GitHub Action for DigitalOcean - doctl
   # You may pin to the exact commit or the version.
-  # uses: digitalocean/app_action@94ed240e4d0ff6cff2020be713f2eb10d9404ad0
-      uses: digitalocean/app_action@v1.1.6
+  # uses: digitalocean/action-doctl@135ac0aa0eed4437d547c6f12c364d3006b42824
+      uses: digitalocean/action-doctl@v2.5.1
       with:
-    # Name of the app. (The name of the app must be unique across all apps in the same account.)
-         app_name:  ccd_2024
-    # DigitalOcean Personal Access Token.(use https://docs.digitalocean.com/reference/api/create-personal-access-token/ for creating new token)
-         token: ${{ secrets.DO_TOKEN }}
-    # (OPTIONAL)a json array of objects with the properties name (description), repository (repo url), tag (image tag)
-         images: '[{
-                    "name": "infra_api", 
-                    "image":{ 
-                    "registry_type": "DOCKER_HUB", #Registry type, DOCR and DOCKER_HUB are supported
-                    "registry": "thomasrbn", # DockerHub only, the registry name
-                    "repository": "https://hub.docker.com/layers/thomasrbn/ccd_infra_api/latest/images/sha256-458f44fb713a4a3c896fc81c68ae4f4e74403c1d6289f486aeaa52131210d1f0", # repository name
-                    "tag": "latest" # tag name
-                
-  },
-}]'
-                   #{ 
-                    # "name": "api",
-                     #"image":{
-                   #   "registry_type": "DOCKER_HUB",
-                    #  "repository": "thomasrbn/ccd_infra_api",
-                     # "tag": "latest"
-                    #},
-                   #},
-                   #{
-                    # "name": "logi",
-                     #"image":{
-                      #"registry_type": "DOCKER_HUB",
-                     # "registry": "DOCKER_HUB",
-                      #"repository": "https://hub.docker.com/r/thomasrbn/ccd_infra_api/tags",
-                      #"tag": "latest"
-                    #},
-                  #}]'
+    # Version of doctl to install
+       version: latest
+    # DigitalOcean API Token
+       token: ${{ secrets.DO_TOKEN }
+          
