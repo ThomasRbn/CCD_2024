@@ -27,10 +27,13 @@ jobs:
           username: ${{ secrets.HUB_LOGIN }}
           password: ${{ secrets.HUB_PASSWORD }}
 
+      - name: Go in infraAPI directory
+        run: cd infraAPI
+
       - name: Build and push Docker image
         run: |
           docker buildx create --use
-          docker buildx build --file infraAPI/Dockerfile --platform linux/amd64,linux/arm64 -t thomasrbn/ccd_infra_api . --push
+          docker buildx build --platform linux/amd64,linux/arm64 -t thomasrbn/ccd_infra_api . --push
 
       - name: SSH into Digital Ocean droplet
         uses: appleboy/ssh-action@master
