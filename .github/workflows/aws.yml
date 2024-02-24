@@ -25,5 +25,5 @@ jobs:
     # DigitalOcean API Token
        token: ${{ secrets.DO_TOKEN }}
     - name: creation api
-      run: doctl apps delete list
+      run: doctl apps  list
           
