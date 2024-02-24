@@ -21,4 +21,6 @@ jobs:
        version: latest
     # DigitalOcean API Token
        token: ${{ secrets.DO_TOKEN }}
+    - name: creation api
+      run: doctl apps create api
           
