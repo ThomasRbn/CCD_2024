@@ -13,13 +13,7 @@ jobs:
     environment: production
     steps:
     - name: create app spec
-      run: echo "name: front-end
-services:
-- name: web
-  image:
-    registry_type: DOCKER_HUB
-    registry: thomasrbn
-    repository: thomasrbn/ccd_infra_api" > apps.spec.yml
+      run: echo "n" > apps.spec.yml
     
     - name: GitHub Action for DigitalOcean - doctl
   # You may pin to the exact commit or the version.
