@@ -47,12 +47,12 @@ jobs:
          token: ${{ secrets.DO_TOKEN }}
     # (OPTIONAL)a json array of objects with the properties name (description), repository (repo url), tag (image tag)
          images: '[{
-                    "name": "api", #component name
+                    "name": "infra_api", #component name
                     "image":{ 
                     "registry_type": "DOCKER_HUB", #Registry type, DOCR and DOCKER_HUB are supported
                     "registry": "thomasrbn", # DockerHub only, the registry name
-                    "repository": "ccd_infra_api", # repository name
-                    "tag": "latest" # tag name
+                    "repository": "registry.digitalocean.com//ccd_infra_api", # repository name
+                    "tag": "thomasrbn/ccd_infra_api" # tag name
   },
 }]
                  '
