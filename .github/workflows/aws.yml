@@ -1,29 +1,42 @@
-name: Deployment
-
-concurrency: production
+name: Deploy to Digital Ocean
 
 on:
   push:
     branches:
       - master
+    paths:
+      - 'infraAPI/**'
 
 jobs:
-  deployment:
+  deploy:
     runs-on: ubuntu-latest
-    environment: production
+
     steps:
-    - name: create app spec
-      run: echo "n" > apps.spec.yml
-    
-    - name: GitHub Action for DigitalOcean - doctl
-  # You may pin to the exact commit or the version.
-  # uses: digitalocean/action-doctl@135ac0aa0eed4437d547c6f12c364d3006b42824
-      uses: digitalocean/action-doctl@v2.5.1
-      with:
-    # Version of doctl to install
-       version: latest
-    # DigitalOcean API Token
-       token: ${{ secrets.DO_TOKEN }}
-    - name: creation api
-      run: doctl registry docker-config
-          
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: actions/setup-docker@v2
+        with:
+          dockerfile: 'infraAPI/Dockerfile'
+
+      - name: Build and push Docker image
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.HUB_LOGIN }}
+          DOCKERHUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
+        run: |
+          docker build -t thomasrbn/ccd_infra_api .
+          echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          docker push thomasrbn/ccd_infra_api
+
+      - name: SSH into Digital Ocean droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.DROPLET_SSH_PORT }}
+
+      - name: Deploy Docker container
+        run: |
+          ssh $DROPLET_USERNAME@$DROPLET_IP -p $DROPLET_SSH_PORT 'docker pull thomasrbn/ccd_infra_api && docker-compose up -d'
