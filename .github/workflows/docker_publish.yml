@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "infraLogi" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --tag thomasrbn/ccd_infra_logi:latest
+      working-directory: infraLogi/
+    - name: deploiement
+      run: docker login -u ${{ secrets.HUB_LOGIN }} -p ${{ secrets.HUB_PASSWORD }}
+    - name: Docker Build & Push to Docker Hub
+      uses: timzu/github-actions-docker@master
+      with:
+          args: --docker
+      env:
+          USERNAME: ${{ secrets.HUB_LOGIN }}
+          PASSWORD: ${{ secrets.HUB_PASSWORD }}
+          DOCKERFILE: "Dockerfile"
+          IMAGE_NAME: "thomasrbn/ccd_infra_logi"
+          TAG_NAME: "latest"
+          LATEST: "true"
