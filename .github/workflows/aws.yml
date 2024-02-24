@@ -33,7 +33,7 @@ jobs:
     - name: permissions  dpssier
       run: sudo chmod 700 ~/.ssh
     - name: connect ssh
-      run: sudo ssh -i ~/.ssh/id_rsa root@209.38.178.131 ls
+      run: sudo ssh -i ${{ secrets.UNIV_RSA }} root@209.38.178.131 ls
       #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
     
      #- name: DigitalOcean App Platform deployment
