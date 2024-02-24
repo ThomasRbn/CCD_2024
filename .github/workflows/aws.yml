@@ -29,9 +29,9 @@ jobs:
     - name: create hosts
       run: touch ~/.ssh/known_hosts
     - name: keyscan
-      run: sudo ssh-keyscan -p 22 -H "209.38.178.131" > ~/.ssh/known_hosts
+      run: sudo ssh-keyscan -H 209.38.178.131 >> ~/.ssh/known_hosts
     - name: connect ssh
-      run: sudo ssh root@209.38.178.131 
+      run: sudo ssh -i ~/.ssh/id_rsa root@209.38.178.131 
       #ls #-l ${{ secrets.UNIV_LOGIN }} -R 209.38.178.131 ls
     
      #- name: DigitalOcean App Platform deployment
