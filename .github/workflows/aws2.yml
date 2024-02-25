@@ -76,7 +76,7 @@ jobs:
         #echo $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker pull thomasrbn/ccd_infra_web:latest
         docker tag thomasrbn/ccd_infra_web:latest public.ecr.aws/w1a8b5a3/thomasrbn/ccd_infra_web:latest
-        docker push public.ecr.aws/w1a8b5a3/ccd_2024:latest
+        docker push public.ecr.aws/w1a8b5a3/thomasrbn/ccd_infra_web:lat
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
