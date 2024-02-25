@@ -40,7 +40,12 @@ jobs:
 
       - name: Remove all running API containers
         run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} docker rm -f $(docker ps -a -q --filter ancestor=thomasrbn/ccd_infra_api)
+          CONTAINER_IDS=$(ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker ps -a -q --filter ancestor=thomasrbn/ccd_infra_api")
+          if [ -n "$CONTAINER_IDS" ]; then
+            ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker rm -f $CONTAINER_IDS"
+          else
+            echo "No containers to remove."
+          fi
 
       - name: Remove API Docker Image
         run: |
