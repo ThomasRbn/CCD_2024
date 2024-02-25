@@ -3,9 +3,9 @@ name: Deploy to Digital Ocean
 on:
   push:
     branches: ['master']
-    paths:
-      - 'infraAPI/**'
-      
+#    paths:
+#      - 'infraAPI/**'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -44,6 +44,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
       - name: Deploy Docker container
         run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} 'docker pull thomasrbn/ccd_infra_api'
+          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} 
