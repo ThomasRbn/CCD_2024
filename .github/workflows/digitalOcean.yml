@@ -29,7 +29,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker buildx create --use
-          docker buildx build --file infraAPI/Dockerfile --platform linux/amd64,linux/arm64 -t thomasrbn/ccd_infra_api . --push
+          docker buildx build --file infraAPI/Dockerfile --platform linux/amd64 -t thomasrbn/ccd_infra_api . --push
 
       - name: Create id_rsa file
         run: |
@@ -47,9 +47,15 @@ jobs:
             echo "No containers to remove."
           fi
 
-      - name: Remove API Docker Image
+      - name: Remove API Docker Image if exists
         run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} docker rmi thomasrbn/ccd_infra_api
+          if ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker images -q thomasrbn/ccd_infra_api"; then
+            echo "API Docker Image exists."
+            ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker rmi thomasrbn/ccd_infra_api"
+          else
+            echo "API Docker Image does not exist. Skipping removal."
+            exit 0
+          fi
 
       - name: Deploy Docker container
         run: |
