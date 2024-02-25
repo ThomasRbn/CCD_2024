@@ -20,7 +20,7 @@ class ThemeController extends AbstractController
         foreach ($themes as $theme) {
             $data[] = $theme->toArray();
         }
-        return $this->json($data);
+        return $this->json($data, Response::HTTP_OK);
     }
 
     #[Route('/api/theme', name: 'theme.post', methods: ['POST'])]
@@ -31,6 +31,6 @@ class ThemeController extends AbstractController
         $theme->updateTheme($data['nom'], $data['code']);
         $manager->persist($theme);
         $manager->flush();
-        return $this->json($theme->toArray());
+        return $this->json($theme->toArray(), Response::HTTP_CREATED);
     }
 }

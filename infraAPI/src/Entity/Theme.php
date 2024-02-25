@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use App\Controller\ThemeController;
 use App\Repository\ThemeRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
             controller: ThemeController::class,
             output: Theme::class,
             name: 'theme.get'
-        )
+        ),
+        new Post(
+            uriTemplate: '/api/theme',
+            controller: ThemeController::class,
+            input: Theme::class,
+            output: Theme::class,
+            name: 'theme.post')
     ]
 )]
 #[ORM\Entity(repositoryClass: ThemeRepository::class)]
@@ -26,9 +33,15 @@ class Theme
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @var string|null $nom Le nom du thème
+     */
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    /**
+     * @var string|null $code Le code du thème
+     */
     #[ORM\Column(length: 10)]
     private ?string $code = null;
 
