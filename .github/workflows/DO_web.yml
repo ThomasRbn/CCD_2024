@@ -1,0 +1,64 @@
+name: Deploy to Digital Ocean
+
+on:
+    push:
+        branches: ['master']
+        paths:
+            - 'infraWeb/**'
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v2
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v1
+
+            - name: Login to DockerHub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.HUB_LOGIN }}
+                  password: ${{ secrets.HUB_PASSWORD }}
+
+            - name: Build and push Docker image
+              run: |
+                  docker buildx create --use
+                  docker buildx build --file infraWeb/Dockerfile --platform linux/amd64 -t thomasrbn/ccd_infra_web . --push
+
+            - name: Create id_rsa file
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
+            - name: Remove all running Web containers
+              run: |
+                  CONTAINER_IDS=$(ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker ps -a -q --filter ancestor=thomasrbn/ccd_infra_web")
+                  if [ -n "$CONTAINER_IDS" ]; then
+                    ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker rm -f $CONTAINER_IDS"
+                  else
+                    echo "No containers to remove."
+                  fi
+
+            - name: Remove Web Docker Image if exists
+              run: |
+                  if ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker images thomasrbn/ccd_infra_web | grep -q thomasrbn/ccd_infra_web"; then
+                    echo "Web Docker Image exists."
+                    ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker rmi thomasrbn/ccd_infra_web"
+                  else
+                    echo "Web Docker Image does not exist. Skipping removal."
+                    exit 0
+                  fi
+
+            - name: Deploy Docker container
+              run: |
+                  ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} docker run -d --name ccd_api -p 8001:8000 thomasrbn/ccd_infra_web
+# TODO : Retirer les containers qui utilisent l'image
+# TODO : Lancer le container
