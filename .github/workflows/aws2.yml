@@ -74,10 +74,10 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         #echo $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w1a8b5a3
+        #aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w1a8b5a3
         docker pull thomasrbn/ccd_infra_web:latest
-        docker tag thomasrbn/ccd_infra_web:latest public.ecr.aws/w1a8b5a3/thomasrbn/ccd_2024:latest
-        docker push public.ecr.aws/w1a8b5a3/thomasrbn/ccd_2024:latest
+        docker tag thomasrbn/ccd_infra_web:latest 854761107679.dkr.ecr.us-east-2.amazonaws.com/ccd_2024:ccd_infra_web
+        docker push 854761107679.dkr.ecr.us-east-2.amazonaws.com/ccd_2024:ccd_infra_web
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
