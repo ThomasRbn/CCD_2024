@@ -1,10 +1,10 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:854761107679:task-definition/ccd_2024:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:854761107679:task-definition/ccd_2024:7",
     "containerDefinitions": [
         {
             "name": "web",
             "image": "https://hub.docker.com/r/thomasrbn/ccd_infra_web",
-            "cpu": 0,
+            "cpu": 1,
             "portMappings": [
                 {
                     "name": "web-80-tcp",
@@ -21,7 +21,7 @@
             "volumesFrom": [],
             "ulimits": [],
             "logConfiguration": {
-                "logDriver": "awslogs",
+                "logDriver": "default",
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/ccd_2024",
