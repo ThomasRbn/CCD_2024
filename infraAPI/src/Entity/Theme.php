@@ -2,9 +2,22 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\ThemeController;
 use App\Repository\ThemeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/api/theme',
+            controller: ThemeController::class,
+            output: Theme::class,
+            name: 'theme.get'
+        )
+    ]
+)]
 #[ORM\Entity(repositoryClass: ThemeRepository::class)]
 class Theme
 {
