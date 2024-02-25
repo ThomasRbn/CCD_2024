@@ -3,10 +3,9 @@ name: Deploy to Digital Ocean
 on:
   push:
     branches:
-      - master
+      - 'master'
     paths:
       - 'infraAPI/**'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
