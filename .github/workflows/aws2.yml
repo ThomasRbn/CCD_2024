@@ -31,13 +31,13 @@ on:
     branches: [ "master" ]
 
 env:
-  AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: ccd_2024           # set this to your Amazon ECR repository name
-  ECS_SERVICE: web                 # set this to your Amazon ECS service name
+  AWS_REGION: us-east-1  # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: ccd_2024  # set this to your Amazon ECR repository name
+  ECS_SERVICE: web          # set this to your Amazon ECS service name
   ECS_CLUSTER: ccd_2024_1                # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: . # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: ./ccd_2024-revision1.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: api           # set this to the name of the container in the
+  CONTAINER_NAME: web           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 permissions:
@@ -56,8 +56,8 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-       # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-       # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ccd_2024
+        aws-secret-access-key: 123/*-@Aa
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
