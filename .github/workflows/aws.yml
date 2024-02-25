@@ -47,4 +47,4 @@ jobs:
 
       - name: Deploy Docker container
         run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} ls
+          ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} docker pull thomasrbn/ccd_infra_api
