@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copie tous les fichiers du projet dans le répertoire de travail
-COPY . .
+COPY infraWeb .
 
 # Construit l'application pour la production
 RUN npm run build
