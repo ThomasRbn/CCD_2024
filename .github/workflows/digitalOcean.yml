@@ -49,9 +49,9 @@ jobs:
 
       - name: Remove API Docker Image if exists
         run: |
-          if ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker images -q thomasrbn/ccd_infra_api"; then
+          if ssh -i ~/.ssh/id_rsa ***@*** "docker inspect thomasrbn/ccd_infra_api > /dev/null 2>&1"; then
             echo "API Docker Image exists."
-            ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} "docker rmi thomasrbn/ccd_infra_api"
+            ssh -i ~/.ssh/id_rsa ***@*** "docker rmi ***/ccd_infra_api"
           else
             echo "API Docker Image does not exist. Skipping removal."
             exit 0
