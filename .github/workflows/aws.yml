@@ -31,12 +31,12 @@ jobs:
           docker buildx create --use
           docker buildx build --file infraAPI/Dockerfile --platform linux/amd64 -t thomasrbn/ccd_infra_api . --push
 
-      - name: SSH into Digital Ocean droplet
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: ${{ secrets.DROPLET_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#      - name: SSH into Digital Ocean droplet
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.DROPLET_IP }}
+#          username: ${{ secrets.DROPLET_USERNAME }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Create id_rsa file
         run: |
@@ -48,3 +48,5 @@ jobs:
       - name: Deploy Docker container
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_IP }} docker pull thomasrbn/ccd_infra_api
+# TODO : Retirer les containers qui utilisent l'image
+# TODO : Lancer le container
