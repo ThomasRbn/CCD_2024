@@ -3,8 +3,8 @@ name: Deploy to Digital Ocean
 on:
   push:
     branches: ['master']
-#    paths:
-#      - 'infraAPI/**'
+    paths:
+      - 'infraAPI/**'
 
 jobs:
   deploy:
