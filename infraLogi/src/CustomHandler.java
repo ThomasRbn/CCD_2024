@@ -48,7 +48,7 @@ public class CustomHandler implements HttpHandler {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         try {
-            String csvCalcul = CSVWritter.write(csvContent);
+            String csvCalcul = JsonWriter.write(csvContent);
             System.out.println(csvCalcul);
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);

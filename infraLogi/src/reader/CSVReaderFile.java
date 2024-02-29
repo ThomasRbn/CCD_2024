@@ -10,7 +10,6 @@ import structureDonnees.Donnees;
 import structureDonnees.Ateliers;
 import structureDonnees.Candidats;
 
-import static reader.CSVReader.readCSV;
 
 public class CSVReaderFile {
 
@@ -67,5 +66,20 @@ public class CSVReaderFile {
             e.printStackTrace();
         }
         return donnees;
+    }
+
+    public static List<String[]> readCSV(String csvContent) throws IOException {
+        List<String[]> data = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvContent))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Divisez la ligne en utilisant le point-virgule comme séparateur
+                String[] row = line.split(";");
+                data.add(row);
+            }
+        }
+
+        return data;
     }
 }

@@ -13,13 +13,14 @@ import structureDonnees.Candidats;
 
 public class CSVReader {
 
-    public static Donnees reader(String csvContent) {
+    public static Donnees reader(String csv) {
 
         // Création de l'instance Donnees
         Donnees donnees = new Donnees();
 
         try {
-            List<String[]> data = readCSV(csvContent);
+            //On recupere les mots qui sont espacés par des points virgules
+            List<String[]> data = readCSV(csv);
 
             // Indicateurs pour savoir si nous traitons les ateliers ou les candidats
             boolean ateliersSection = false;
@@ -71,7 +72,8 @@ public class CSVReader {
     public static List<String[]> readCSV(String csvContent) throws IOException {
         List<String[]> data = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvContent))) {
+        try ( StringReader sr = new StringReader(csvContent);
+              BufferedReader br = new BufferedReader(sr)) {
             String line;
             while ((line = br.readLine()) != null) {
                 // Divisez la ligne en utilisant le point-virgule comme séparateur
