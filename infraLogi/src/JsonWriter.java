@@ -34,7 +34,7 @@ public class JsonWriter {
                 firstUser = false;
             }
 
-            jsonBuilder.append("\"id\":\"").append(candidats.getId()).append("\":{");
+            jsonBuilder.append("\"").append(candidats.getId()).append("\":{");
             jsonBuilder.append("\"nom\":\"").append(candidats.getPrenom()).append("\",");
             jsonBuilder.append("\"ateliers\":[");
 
